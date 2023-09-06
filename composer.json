@@ -20,7 +20,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/drutz-cpnv/maw-framework"
+            "url": "https://github.com/CPNV-ES/oopers-maw-framework"
         }
     ],
     "require": {
