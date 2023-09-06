@@ -1,0 +1,20 @@
+{
+    "name": "oopers/maw-exercise-looper",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "dimitri-rutz",
+            "email": "dimitri.rutz@eduvaud.ch"
+        },
+        {
+            "name": "eliott-jaquier",
+            "email": "eliott.jaquier@eduvaud.ch"
+        }
+    ],
+    "require": {}
+}
