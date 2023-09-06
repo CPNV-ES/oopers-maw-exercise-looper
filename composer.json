@@ -6,6 +6,7 @@
             "App\\": "src/"
         }
     },
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "dimitri-rutz",
@@ -16,5 +17,13 @@
             "email": "eliott.jaquier@eduvaud.ch"
         }
     ],
-    "require": {}
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/drutz-cpnv/maw-framework"
+        }
+    ],
+    "require": {
+        "oopers/maw-framework": "master"
+    }
 }

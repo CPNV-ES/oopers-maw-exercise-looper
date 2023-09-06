@@ -4,15 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33fd95659d355aae969359c2542ce902",
-    "packages": [],
+    "content-hash": "4d13f8448f5401f0b2fbd1da3667e19d",
+    "packages": [
+        {
+            "name": "oopers/maw-framework",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drutz-cpnv/maw-framework.git",
+                "reference": "9df7af6db2fe7a3fbcc560284a6f6f23fa128550"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drutz-cpnv/maw-framework/zipball/9df7af6db2fe7a3fbcc560284a6f6f23fa128550",
+                "reference": "9df7af6db2fe7a3fbcc560284a6f6f23fa128550",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MVC\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "dimitri-rutz",
+                    "email": "dimitri.rutz@eduvaud.ch"
+                },
+                {
+                    "name": "eliott-jaquier",
+                    "email": "eliott.jaquier@eduvaud.ch"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/drutz-cpnv/maw-framework/tree/develop",
+                "issues": "https://github.com/drutz-cpnv/maw-framework/issues"
+            },
+            "time": "2023-09-06T09:58:22+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }
