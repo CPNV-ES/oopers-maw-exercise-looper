@@ -1,0 +1,18 @@
+{
+  "name": "maw-exercise-looper",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build-css": "bunx sass assets/style/app.scss public/build/app.css",
+    "watch": "bunx sass --watch assets/style/app.scss public/build/app.css"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "sass": "^1.66.1"
+  }
+}
