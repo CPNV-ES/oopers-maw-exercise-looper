@@ -13,27 +13,36 @@ This app serves primarily as a demonstration of [the framework developed in para
 
 ## Get Started
 ### PHP Dependencies
+Install dependencies with composer
 ````shell
 composer install
 ````
 
-### SCSS Build
+### SCSS
 To install and build SCSS, we chose [SASS](https://sass-lang.com/) integration with the [Package Manager from Node.js](https://nodejs.org/)
 
+#### Install
 After installing Node.js, run following command to install SASS:
 ````shell
 npm install
 ````
-#### Deploy
+#### Build
 To deploy/build assets for productions, run following command:
 ````shell
 npm run build-css
 ````
-#### Development
+#### Development / Watch
 During development, use following command to watch changes on your scss file.
 ````shell
 npm run watch-css
 ````
-> ### Note
+> #### Note
 > Your SCSS target file **MUST** be named ```app.scss``` and must be place in ```assets/style/```.
 > If you need an deferent file name you must edit ```package.json``` file and change called files in all command line described in ```scripts```. 
+
+### Serve app
+You can use the PHP Built-in web server to serve the app :
+````shell
+cd public
+php -S localhost:8000
+````
