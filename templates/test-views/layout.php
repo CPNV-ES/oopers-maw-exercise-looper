@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise Looper Clone</title>
     <script src="https://kit.fontawesome.com/f5c1a22e81.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/milligram.min.css">
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="../../public/assets/milligram.min.css">
+    <link rel="stylesheet" href="../../public/assets/styles.css">
 </head>
 <body>
 <?php
