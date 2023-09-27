@@ -1,30 +1,36 @@
-.answering{
+.answering {
   background-color: $main;
   border-color: $main;
 }
-.answering-list{
-  display:grid;
-  grid-template-columns: repeat(auto-fill,minmax(300px,10px));
+
+.answering-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 10px));
   grid-template-rows: auto;
   grid-column-gap: 30px;
   justify-content: center;
-  padding:10px;
+  padding: 10px;
 }
-.answer{
-  i{
+
+.answer {
+  i {
     font-size: 2rem;
+
+    &.empty {
+      color: $error;
+      font-weight: bold;
+    }
+
+    &.short {
+      color: $ok;
+    }
+
+    &.filled {
+      color: $ok;
+    }
   }
-  i.empty {
-     color: $error;
-     font-weight: bold;
-  }
-  i.short {
-    color: $ok;
-  }
-  i.filled {
-     color: $ok;
-   }
 }
+
 dl.answer dt {
   font-weight: bold;
 }
