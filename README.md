@@ -10,3 +10,27 @@ This app serves primarily as a demonstration of [the framework developed in para
 - The principle followed is KISS (Keep it simple stupid)
 - We use the 'GitFlow' branching strategy
 - We use a scrum-based approach inside [Jira Software](https://ejcpnvprojects.atlassian.net/jira/software/projects/MAW1/boards/2/backlog)
+
+## Get Started
+### Assets
+Currently due to project requirement assets include only SCSS/CSS and not JavaScript.
+
+For assets we decided to use [Bun](https://bun.sh/).
+
+After installing Bun run following command:
+````shell
+bun install
+````
+#### Deploy
+To deploy/build assets for productions, run following command:
+````shell
+bun run build-css
+````
+#### Development
+During development, use following command to watch changes on your scss file.
+````shell
+bun run watch
+````
+> ### Note
+> Your SCSS target file **MUST** be named ```app.scss``` and must be place in ```assets/style/```.
+> If you need an deferent file name you must edit ```package.json``` file and change called files in all command line described in ```scripts```. 
