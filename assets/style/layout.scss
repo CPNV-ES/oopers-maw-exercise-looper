@@ -1,0 +1,64 @@
+@import "colors";
+
+body {
+  margin: 0;
+}
+
+a{
+  color: $main;
+}
+
+.button, button, input[type='button'], input[type='reset'], input[type='submit']{
+  background-color: $main;
+  border-color: $main;
+}
+
+header{
+  background-color: $main;
+  .title-label{
+    margin: auto auto auto 2rem;
+  }
+  .title-label-bold{
+    font-weight: bold;
+  }
+}
+
+header.heading{
+  section {
+    display: flex;
+    height: 5rem;
+    color: white;
+  }
+  img {
+    height: 100%;
+  }
+}
+
+header.dashboard{
+  .container{
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    h1 {
+      letter-spacing: 1.1rem;
+    }
+  }
+}
+
+.container{
+  padding: 0 2rem;
+}
+
+.column.card{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 0.4rem;
+  text-align: center;
+  background-color: $grey-white;
+}
+
+.column.card .button{
+  width: 100%;
+}
