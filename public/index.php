@@ -1,5 +1,7 @@
 <?php
 
+use MVC\Kernel;
+
 require '../vendor/autoload.php';
 
-require '../templates/test-views/layout.php';
+new Kernel("../.env");
