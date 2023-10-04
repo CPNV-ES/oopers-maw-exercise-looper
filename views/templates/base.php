@@ -9,6 +9,6 @@
     <link rel="stylesheet" href="build/app.css">
 </head>
 <body>
-
+<?=$content?>
 </body>
 </html>
