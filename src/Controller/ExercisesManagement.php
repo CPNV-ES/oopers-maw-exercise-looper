@@ -7,7 +7,7 @@ use \MVC\Http\Response\Response;
 #[Route("/exercises")]
 class ExercisesManagement extends Controller
 {
-    #[Route("/")]
+    #[Route("")]
     function showExercisesList(): Response
     {
         return $this->render('exercises/management/list');
