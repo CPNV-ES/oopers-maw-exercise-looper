@@ -1,9 +1,4 @@
-<header class="heading managing">
-    <section class="container">
-        <a href="/"><img src="/assets/logo.png"></a>
-        <span class="title-label">Title: <span class="title-label-bold">a</span></span>
-    </section>
-</header>
+<?php include $_SERVER['DOCUMENT_ROOT']."/../views/headers/heading-results.php"  ?>
 
 <main class="container">
     <div class="row">
