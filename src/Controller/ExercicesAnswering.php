@@ -13,4 +13,9 @@ class ExercicesAnswering extends Controller
     {
         return $this->render('exercises/answering/list');
     }
+    #[Route("/[:id]/fulfillments/new")]
+    function showNewFulfillment(): Response
+    {
+        return $this->render('exercises/answering/fulfillment');
+    }
 }
