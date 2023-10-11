@@ -12,4 +12,9 @@ class ExercisesManagement extends Controller
     {
         return $this->render('exercises/management/list');
     }
+    #[Route("/[:exerciceid]/results")]
+    function showExerciceResults($exerciceid): Response
+    {
+        return $this->render('exercises/management/results');
+    }
 }
