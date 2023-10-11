@@ -1,4 +1,5 @@
 <?php
+
 include $_SERVER['DOCUMENT_ROOT'] . "/../views/headers/heading-managing.php" ?>
 
 <main class="container">

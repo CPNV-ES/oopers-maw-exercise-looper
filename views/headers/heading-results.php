@@ -1,3 +1,4 @@
 <header class="heading results">
-    <?php include "heading-container.php"?>
+    <?php
+    include "heading-container.php" ?>
 </header>

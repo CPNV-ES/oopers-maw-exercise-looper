@@ -10,6 +10,6 @@
     <script src="/assets/rails-ujs.js"></script>
 </head>
 <body>
-<?=$content?>
+<?= $content ?>
 </body>
 </html>

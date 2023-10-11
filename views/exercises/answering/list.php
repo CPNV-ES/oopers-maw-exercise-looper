@@ -1,4 +1,5 @@
-<?php include $_SERVER['DOCUMENT_ROOT']."/../views/headers/heading-answering.php"  ?>
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . "/../views/headers/heading-answering.php" ?>
 
 <main class="container">
     <div class="answering-list">
