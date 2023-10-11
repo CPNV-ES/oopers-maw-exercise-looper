@@ -14,11 +14,11 @@
 
                 <tbody>
                 <tr>
-                    <td>test</td>
+                    <td>Test</td>
                     <td>
-                        <a title="Manage fields" href="/exercises/37/fields"><i class="fa fa-edit"></i></a>
-                        <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                           href="/exercises/37"><i class="fa fa-trash"></i></a>
+                        <a title="Be ready for answers" rel="nofollow" data-method="put" href="/exercises/91?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
+                        <a title="Manage fields" href="/exercises/91/fields"><i class="fa fa-edit"></i></a>
+                        <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href="/exercises/91"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
                 <tr>
