@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Controller;
+
 use MVC\Http\Controller\Controller;
 use MVC\Http\Routing\Annotation\Route;
-use \MVC\Http\Response\Response;
+use MVC\Http\Response\Response;
 
 class HomeController extends Controller
 {
