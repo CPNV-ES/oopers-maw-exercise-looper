@@ -6,7 +6,7 @@ use \MVC\Http\Response\Response;
 
 
 #[Route("/exercises")]
-class ExercicesAnswering extends Controller
+class ExercisesAnswering extends Controller
 {
     #[Route("/answering")]
     function showAnsweringList(): Response
