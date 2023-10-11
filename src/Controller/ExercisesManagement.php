@@ -1,6 +1,8 @@
 <?php
+namespace App\Controller;
 
 use MVC\Http\Controller\Controller;
+use MVC\Http\HTTPMethod;
 use MVC\Http\Routing\Annotation\Route;
 use \MVC\Http\Response\Response;
 
@@ -11,6 +13,20 @@ class ExercisesManagement extends Controller
     function showExercisesList(): Response
     {
         return $this->render('exercises/management/list');
+    }
+    #[Route("/[:exerciceid]",methods: [HTTPMethod::PUT])]
+    function changExerciceInfo($exerciceid): Response
+    {
+        $response = new Response();
+        $response->headers->set('Location', "../exercises");
+        return $response;
+    }
+    #[Route("/[:exerciseid]",methods: [HTTPMethod::DELETE])]
+    function deleteExercise($exerciseid): Response
+    {
+        $response = new Response();
+        $response->headers->set('Location', "../exercises");
+        return $response;
     }
     #[Route("/[:exerciceid]/results")]
     function showExerciceResults($exerciceid): Response
