@@ -4,19 +4,19 @@ namespace App\Controller;
 
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
-use MVC\Http\Routing\Annotation\Route;
 use MVC\Http\Response\Response;
+use MVC\Http\Routing\Annotation\Route;
 
 #[Route("/exercises")]
 class ExercisesCreation extends Controller
 {
-    #[Route("/new")]
+    #[Route("/new", name: 'exercise.new')]
     public function showExerciseCreation(): Response
     {
         return $this->render('exercises/creation/new-exercice');
     }
 
-    #[Route("", methods: [HTTPMethod::POST])]
+    #[Route("", name: 'exercise.new', methods: [HTTPMethod::POST])]
     public function createExercise(): Response
     {
         $response = new Response();
@@ -24,25 +24,25 @@ class ExercisesCreation extends Controller
         return $response;
     }
 
-    #[Route("/[:exerciceid]/fields")]
+    #[Route("/[:exerciceid]/fields", name: 'exercise.fields')]
     public function showExerciseFields($exerciceid): Response
     {
         return $this->render('exercises/creation/fields');
     }
 
-    #[Route("/[:exerciceid]/fields", methods: [HTTPMethod::POST])]
+    #[Route("/[:exerciceid]/fields", name: 'exercise.fields', methods: [HTTPMethod::POST])]
     public function createExerciseField($exerciceid): Response
     {
         return $this->render('exercises/creation/fields');
     }
 
-    #[Route("/[:exerciceid]/fields/[:fieldid]/edit")]
+    #[Route("/[:exerciceid]/fields/[:fieldid]/edit", name: 'exercise.field.edit')]
     public function showFieldEdition($exerciceid, $fieldid): Response
     {
         return $this->render('exercises/creation/field-edit');
     }
 
-    #[Route("/[:exerciceid]/fields/[:fieldid]", methods: [HTTPMethod::POST])]
+    #[Route("/[:exerciceid]/fields/[:fieldid]", name: 'exercise.field', methods: [HTTPMethod::POST])]
     public function editField($exerciceid, $fieldid): Response
     {
         $response = new Response();
@@ -50,7 +50,7 @@ class ExercisesCreation extends Controller
         return $response;
     }
 
-    #[Route("/[:exerciceid]/fields/[:fieldid]", methods: [HTTPMethod::DELETE])]
+    #[Route("/[:exerciceid]/fields/[:fieldid]", name: 'exercise.field', methods: [HTTPMethod::DELETE])]
     public function deleteField($exerciceid, $fieldid): Response
     {
         $response = new Response();

@@ -4,26 +4,26 @@ namespace App\Controller;
 
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
-use MVC\Http\Routing\Annotation\Route;
 use MVC\Http\Response\Response;
+use MVC\Http\Routing\Annotation\Route;
 
 
 #[Route("/exercises")]
 class ExercisesAnswering extends Controller
 {
-    #[Route("/answering")]
+    #[Route("/answering", name: 'answering')]
     public function showAnsweringList(): Response
     {
         return $this->render('exercises/answering/list');
     }
 
-    #[Route("/[:exerciceid]/fulfillments/new")]
+    #[Route("/[:exerciceid]/fulfillments/new", name: 'fulfillment.new')]
     public function showNewFulfillment($exerciceid): Response
     {
         return $this->render('exercises/answering/fulfillment');
     }
 
-    #[Route("/[:exerciceid]/fulfillments", methods: [HTTPMethod::POST])]
+    #[Route("/[:exerciceid]/fulfillments", name: 'fulfillments', methods: [HTTPMethod::POST])]
     public function addFulfillment($exerciceid): Response
     {
         $response = new Response();
@@ -31,13 +31,13 @@ class ExercisesAnswering extends Controller
         return $response;
     }
 
-    #[Route("/[:exerciceid]/fulfillments/[:fulfillmentid]/edit")]
+    #[Route("/[:exerciceid]/fulfillments/[:fulfillmentid]/edit", name: 'fulfillment.edit')]
     public function showEditFulfillment($exerciceid, $fulfillmentid): Response
     {
         return $this->render('exercises/answering/fulfillmentEdit');
     }
 
-    #[Route("/[:exerciceid]/fulfillments/[:fulfillmentid]", methods: [HTTPMethod::POST])]
+    #[Route("/[:exerciceid]/fulfillments/[:fulfillmentid]", name: 'fulfillment', methods: [HTTPMethod::POST])]
     public function editFulfillment($exerciceid, $fulfillmentid): Response
     {
         $response = new Response();
