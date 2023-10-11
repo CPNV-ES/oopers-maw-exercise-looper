@@ -17,4 +17,14 @@ class ExercisesManagement extends Controller
     {
         return $this->render('exercises/management/results');
     }
+    #[Route("/[:exerciceid]/fulfillments/[:fulfillmentid]")]
+    function showFulfillment($exerciceid,$fulfillmentid): Response
+    {
+        return $this->render('exercises/management/results-by-fulfillment');
+    }
+    #[Route("/[:exerciceid]/results/[:resultid]")]
+    function showExerciceResult($exerciceid,$resultid): Response
+    {
+        return $this->render('exercises/management/results-by-question');
+    }
 }
