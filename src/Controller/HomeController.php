@@ -7,7 +7,7 @@ use \MVC\Http\Response\Response;
 class HomeController extends Controller
 {
     #[Route("/")]
-    function showHome(): Response
+    public function showHome(): Response
     {
         return $this->render('home');
     }
