@@ -37,7 +37,7 @@ class ExercisesAnswering extends Controller
         return $this->render('exercises/answering/fulfillmentEdit');
     }
 
-    #[Route("/[:exerciceid]/fulfillments/[:fulfillmentid]", name: 'fulfillment', methods: [HTTPMethod::POST])]
+    #[Route("/[:exerciceid]/fulfillments/[:fulfillmentid]", name: 'fulfillment', methods: [HTTPMethod::PATCH])]
     public function editFulfillment($exerciceid, $fulfillmentid): Response
     {
         $response = new Response();
