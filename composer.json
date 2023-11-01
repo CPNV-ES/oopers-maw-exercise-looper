@@ -8,7 +8,7 @@
     },
     "require": {
         "php": "^8.2",
-        "oopers/maw-framework": "master"
+        "oopers/maw-framework": "dev-develop"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.26",
