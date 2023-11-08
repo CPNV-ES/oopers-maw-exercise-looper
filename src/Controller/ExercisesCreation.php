@@ -45,16 +45,12 @@ class ExercisesCreation extends Controller
     #[Route("/[:id]/fields/[:fieldId]", name: 'exercise.field', methods: [HTTPMethod::POST])]
     public function editField(int $id, int $fieldId): Response
     {
-        $response = new Response();
-        $response->headers->set('Location', "../fields");
-        return $response;
+        return $this->redirectToRoute("exercise.fields",["id"=>$id]);
     }
 
     #[Route("/[:id]/fields/[:fieldId]", name: 'exercise.field', methods: [HTTPMethod::DELETE])]
     public function deleteField(int $id, int $fieldId): Response
     {
-        $response = new Response();
-        $response->headers->set('Location', "../fields");
-        return $response;
+        return $this->redirectToRoute("exercise.fields",["id"=>$id]);
     }
 }

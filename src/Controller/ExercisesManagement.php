@@ -18,17 +18,13 @@ class ExercisesManagement extends Controller
     #[Route("/[:id]", name: 'exercise', methods: [HTTPMethod::PUT])]
     public function changExerciceInfo(int $id): Response
     {
-        $response = new Response();
-        $response->headers->set('Location', "../exercises");
-        return $response;
+        return $this->redirectToRoute("exercises");
     }
 
     #[Route("/[:id]", name: 'exercise', methods: [HTTPMethod::DELETE])]
     public function deleteExercise(int $id): Response
     {
-        $response = new Response();
-        $response->headers->set('Location', "../exercises");
-        return $response;
+        return $this->redirectToRoute("exercises");
     }
 
     #[Route("/[:id]/results", name: 'exercise.results')]

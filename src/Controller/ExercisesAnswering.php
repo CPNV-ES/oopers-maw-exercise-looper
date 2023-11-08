@@ -26,9 +26,7 @@ class ExercisesAnswering extends Controller
     #[Route("/[:id]/fulfillments", name: 'fulfillments', methods: [HTTPMethod::POST])]
     public function addFulfillment(int $id): Response
     {
-        $response = new Response();
-        $response->headers->set('Location', "fulfillments/1/edit");
-        return $response;
+        return $this->redirectToRoute("fulfillment.edit",["id"=>1,"fulfillmentId"=>1]);
     }
 
     #[Route("/[:id]/fulfillments/[:fulfillmentId]/edit", name: 'fulfillment.edit')]
@@ -40,8 +38,6 @@ class ExercisesAnswering extends Controller
     #[Route("/[:id]/fulfillments/[:fulfillmentId]", name: 'fulfillment', methods: [HTTPMethod::PATCH])]
     public function editFulfillment(int $id, int $fulfillmentId): Response
     {
-        $response = new Response();
-        $response->headers->set('Location', "$fulfillmentId/edit");
-        return $response;
+        return $this->redirectToRoute("fulfillment.edit",["id"=>1,"fulfillmentId"=>1]);
     }
 }
