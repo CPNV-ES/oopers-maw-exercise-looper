@@ -4,4 +4,4 @@ use MVC\Kernel;
 
 require '../vendor/autoload.php';
 
-new Kernel("../.env");
+(new Kernel("../.env"))->executeRoute();
