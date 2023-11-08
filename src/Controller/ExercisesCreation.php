@@ -24,34 +24,34 @@ class ExercisesCreation extends Controller
         return $response;
     }
 
-    #[Route("/[:exerciceid]/fields", name: 'exercise.fields')]
-    public function showExerciseFields($exerciceid): Response
+    #[Route("/[:id]/fields", name: 'exercise.fields')]
+    public function showExerciseFields(int $id): Response
     {
         return $this->render('exercises/creation/fields');
     }
 
-    #[Route("/[:exerciceid]/fields", name: 'exercise.fields', methods: [HTTPMethod::POST])]
-    public function createExerciseField($exerciceid): Response
+    #[Route("/[:id]/fields", name: 'exercise.fields', methods: [HTTPMethod::POST])]
+    public function createExerciseField(int $id): Response
     {
         return $this->render('exercises/creation/fields');
     }
 
-    #[Route("/[:exerciceid]/fields/[:fieldid]/edit", name: 'exercise.field.edit')]
-    public function showFieldEdition($exerciceid, $fieldid): Response
+    #[Route("/[:id]/fields/[:fieldId]/edit", name: 'exercise.field.edit')]
+    public function showFieldEdition(int $id, int $fieldId): Response
     {
         return $this->render('exercises/creation/field-edit');
     }
 
-    #[Route("/[:exerciceid]/fields/[:fieldid]", name: 'exercise.field', methods: [HTTPMethod::POST])]
-    public function editField($exerciceid, $fieldid): Response
+    #[Route("/[:id]/fields/[:fieldId]", name: 'exercise.field', methods: [HTTPMethod::POST])]
+    public function editField(int $id, int $fieldId): Response
     {
         $response = new Response();
         $response->headers->set('Location', "../fields");
         return $response;
     }
 
-    #[Route("/[:exerciceid]/fields/[:fieldid]", name: 'exercise.field', methods: [HTTPMethod::DELETE])]
-    public function deleteField($exerciceid, $fieldid): Response
+    #[Route("/[:id]/fields/[:fieldId]", name: 'exercise.field', methods: [HTTPMethod::DELETE])]
+    public function deleteField(int $id, int $fieldId): Response
     {
         $response = new Response();
         $response->headers->set('Location', "../fields");
