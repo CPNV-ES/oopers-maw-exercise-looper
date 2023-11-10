@@ -14,13 +14,13 @@ class ExercisesAnswering extends Controller
     #[Route("/answering", name: 'answering')]
     public function index(): Response
     {
-        return $this->render('exercises/answering/list');
+        return $this->render('exercises.answering.list');
     }
 
     #[Route("/[:id]/fulfillments/new", name: 'fulfillment.new')]
     public function showNewFulfillment(int $id): Response
     {
-        return $this->render('exercises/answering/fulfillment');
+        return $this->render('exercises.answering.fulfillment');
     }
 
     #[Route("/[:id]/fulfillments", name: 'fulfillments', methods: [HTTPMethod::POST])]
@@ -32,7 +32,7 @@ class ExercisesAnswering extends Controller
     #[Route("/[:id]/fulfillments/[:fulfillmentId]/edit", name: 'fulfillment.edit')]
     public function showEditFulfillment(int $id, int $fulfillmentId): Response
     {
-        return $this->render('exercises/answering/fulfillmentEdit');
+        return $this->render('exercises.answering.fulfillmentEdit');
     }
 
     #[Route("/[:id]/fulfillments/[:fulfillmentId]", name: 'fulfillment', methods: [HTTPMethod::PATCH])]

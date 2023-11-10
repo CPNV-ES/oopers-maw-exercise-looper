@@ -12,7 +12,7 @@ class ExercisesManagement extends Controller
     #[Route("", name: 'exercises')]
     public function showExercisesList(): Response
     {
-        return $this->render('exercises/management/list');
+        return $this->render('exercises.management.list');
     }
 
     #[Route("/[:id]", name: 'exercise', methods: [HTTPMethod::PUT])]
@@ -30,18 +30,18 @@ class ExercisesManagement extends Controller
     #[Route("/[:id]/results", name: 'exercise.results')]
     public function showExerciceResults(int $id): Response
     {
-        return $this->render('exercises/management/results');
+        return $this->render('exercises.management.results');
     }
 
     #[Route("/[:id]/results/[:resultId]", name: 'exercise.result')]
     public function showExerciceResult(int $id, int $resultId): Response
     {
-        return $this->render('exercises/management/results-by-question');
+        return $this->render('exercises.management.results-by-question');
     }
 
     #[Route("/[:id]/fulfillments/[:fulfillmentId]", name: 'fulfillment')]
     public function showFulfillment(int $id, int $fulfillmentId): Response
     {
-        return $this->render('exercises/management/results-by-fulfillment');
+        return $this->render('exercises.management.results-by-fulfillment');
     }
 }
