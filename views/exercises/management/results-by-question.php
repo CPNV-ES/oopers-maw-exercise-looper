@@ -1,4 +1,4 @@
-<?=$this->include("partial.topbar",["title"=>"Results by question","type"=>"results"])?>
+<?=$this->include("partial.topbar",["title"=>"Results.php by question","type"=>"results"])?>
 
 <main class="container">
     <h1>Quels sont les trois piliers (principes) de scrum ?</h1>
@@ -12,7 +12,7 @@
 
         <tbody>
         <tr>
-            <td><a href="/exercises/1/fulfillments/3">2020-10-26 12:53:43 UTC</a></td>
+            <td><a href="<?=$this->url("exercises.fulfillments.show",["exerciceId"=>1,"fulfillmentId"=>4])?>">2020-10-26 12:53:43 UTC</a></td>
             <td>Transparence, Adaptation et Recherche</td>
         </tr>
         <tr>

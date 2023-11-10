@@ -4,7 +4,7 @@
     <div class="answering-list">
         <div class="column card">
             <div class="title">Linux base commands</div>
-            <a class="button" href="/exercises/9/fulfillments/new">Take it</a>
+            <a class="button" href="<?=$this->url("exercises.fulfillments.new",["exerciceId"=>11])?>">Take it</a>
         </div>
 
         <div class="column card">

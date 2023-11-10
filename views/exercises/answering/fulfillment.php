@@ -3,7 +3,7 @@
 <main class="container">
     <h1>Your take</h1>
     <p>If you'd like to come back later to finish, simply submit it with blanks</p>
-    <form action="/exercises/7/fulfillments" accept-charset="UTF-8" method="post">
+    <form action="<?=$this->url("exercises.fulfillments.create",["exerciceId"=>$this->exerciceId])?>" accept-charset="UTF-8" method="post">
 
         <input type="hidden" value="17" name="fulfillment[answers_attributes][][field_id]"
                id="fulfillment_answers_attributes__field_id">

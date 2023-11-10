@@ -3,7 +3,7 @@
 <main class="container">
     <h1>Editing Field</h1>
 
-    <form action="/exercises/100/fields/222" accept-charset="UTF-8" method="post">
+    <form action="<?=$this->url("exercises.fields.show",["exerciceId"=>$this->exerciceId])?>" accept-charset="UTF-8" method="post">
         <div class="field">
             <label for="field_label">Label</label>
             <input type="text" value="QUOI" name="field[label]" id="field_label">

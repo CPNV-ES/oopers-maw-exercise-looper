@@ -4,7 +4,7 @@
     <h1>Your take</h1>
     <p>Bookmark this page, it's yours. You'll be able to come back later to finish.</p>
 
-    <form action="/exercises/7/fulfillments/386" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden"
+    <form action="<?=$this->url("exercises.fulfillments.update",["exerciceId"=>$this->exerciceId,"fulfillmentId"=>$this->fulfillmentId])?>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden"
                                                                                              value="✓"><input
                 type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token"
                                                                   value="lCQt3QBUPBb8d9rpKYH7nHks17MeSK/oDRRZN0swhyTKA02cSf5Y/5hHpZUkHpsOkSDfycZVRYprER/M1Ov4kg==">
