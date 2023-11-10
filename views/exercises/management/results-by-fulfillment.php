@@ -1,6 +1,4 @@
-<?php
-
-include $_SERVER['DOCUMENT_ROOT'] . "/../views/headers/heading-results.php" ?>
+<?=$this->include("partial.topbar",["title"=>"Results by fulfillment","type"=>"results"])?>
 
 <main class="container">
     <h1>2023-09-05 14:38:00 UTC</h1>

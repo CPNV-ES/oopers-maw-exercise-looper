@@ -1,5 +1,4 @@
-<?php
-include $_SERVER['DOCUMENT_ROOT'] . "/../views/headers/heading-answering.php" ?>
+<?=$this->include("partial.topbar",["title"=>"List to answer","type"=>"answering"])?>
 
 <main class="container">
     <div class="answering-list">

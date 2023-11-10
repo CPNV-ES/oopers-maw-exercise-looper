@@ -1,5 +1,4 @@
-<?php
-include $_SERVER['DOCUMENT_ROOT'] . "/../views/headers/heading-results.php" ?>
+<?=$this->include("partial.topbar",["title"=>"Managing exercices","type"=>"results"])?>
 
 <main class="container">
     <div class="row">

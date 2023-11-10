@@ -1,6 +1,4 @@
-<?php
-
-include $_SERVER['DOCUMENT_ROOT'] . "/../views/headers/heading-managing.php" ?>
+<?=$this->include("partial.topbar",["title"=>"Edit fields of a new exercice","type"=>"managing"])?>
 
 <main class="container">
     <div class="row">

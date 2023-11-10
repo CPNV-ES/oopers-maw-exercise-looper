@@ -1,6 +1,4 @@
-<?php
-
-include $_SERVER['DOCUMENT_ROOT'] . "/../views/headers/heading-results.php" ?>
+<?=$this->include("partial.topbar",["title"=>"Results by question","type"=>"results"])?>
 
 <main class="container">
     <h1>Quels sont les trois piliers (principes) de scrum ?</h1>
