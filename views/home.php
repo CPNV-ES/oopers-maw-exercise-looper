@@ -1,6 +1,6 @@
 <header class="dashboard">
     <section class="container">
-        <p><img src="assets/logo.png" alt="Exercise looper logo"></p>
+        <p><img src="/assets/logo.png" alt="Exercise looper logo"></p>
         <h1>Exercise<br>Looper Clone</h1>
     </section>
 </header>

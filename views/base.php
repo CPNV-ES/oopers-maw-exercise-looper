@@ -6,9 +6,10 @@
     <title>Exercise Looper Clone</title>
     <script src="https://kit.fontawesome.com/f5c1a22e81.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
-    <link rel="stylesheet" href="build/app.css">
+    <link rel="stylesheet" href="/build/app.css">
+    <script src="/assets/rails-ujs.js"></script>
 </head>
 <body>
-
+<?= $this->body ?>
 </body>
 </html>
