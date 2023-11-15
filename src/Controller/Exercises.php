@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Models\Entities\Questionnaire;
+use App\Models\Services\DBOperationsProvider;
+use App\Models\Services\PDOConnector;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
 use MVC\Http\Response\Response;
 use MVC\Http\Routing\Annotation\Route;
+use ORM\SQLOperations;
 
 
 #[Route("/exercises", name:"exercises.")]
@@ -21,14 +25,22 @@ class Exercises extends Controller
     #[Route("", name: 'create', methods: [HTTPMethod::POST])]
     public function createExercise(): Response
     {
-        $id = 0;//TODO : The id of exercise created
-        return $this->redirectToRoute("exercises.fields.show",["exerciceId"=>$id]);
+        $questionnaire = new Questionnaire();
+        $questionnaire->setTitle("TEST!");
+        try {
+            $questionnaire->setId(DBOperationsProvider::GetUnique()->create($questionnaire));
+            return $this->redirectToRoute("exercises.fields.show",["exerciceId"=>$questionnaire->getId()]);
+        }catch (\Exception $e){
+            //Handle SQL Error (like unique name already exists
+            return $this->render('exercises.creation.new-exercice');
+        }
     }
 
     /*-- ANSWERING / FULFILLMENT --*/
     #[Route("/answering", name: 'answering')]
     public function index(): Response
     {
+        $questionnaires = DBOperationsProvider::GetUnique()->fetchAll(Questionnaire::class);
         return $this->render('exercises.answering.list');
     }
 
