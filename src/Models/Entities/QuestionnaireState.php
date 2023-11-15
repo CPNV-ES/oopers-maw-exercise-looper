@@ -2,9 +2,9 @@
 
 namespace App\Models\Entities;
 
-enum QuestionnaireState
+enum QuestionnaireState: string
 {
-    case Building;
-    case Answering;
-    case Closed;
+    case Building = 'Building';
+    case Answering = 'Answering';
+    case Closed = 'Closed';
 }

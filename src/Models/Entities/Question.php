@@ -12,7 +12,7 @@ class Question
     private int $id;
     #[Column("statement")]
     private string $statement;
-    #[Column("question_kind_id")]
+    #[Column("kind")]
     private QuestionKind $kind;
     #[Column("questionnaires_id")]
     private Questionnaire $questionnaire;

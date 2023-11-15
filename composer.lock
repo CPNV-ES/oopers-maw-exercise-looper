@@ -147,12 +147,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CPNV-ES/oopers-maw-framework.git",
-                "reference": "af2f9e7368ff29554f99e28fd10e5c0b38a4ce6d"
+                "reference": "e3fb5b9d838c70de1a4d2f3c80d53b303bc40e49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CPNV-ES/oopers-maw-framework/zipball/af2f9e7368ff29554f99e28fd10e5c0b38a4ce6d",
-                "reference": "af2f9e7368ff29554f99e28fd10e5c0b38a4ce6d",
+                "url": "https://api.github.com/repos/CPNV-ES/oopers-maw-framework/zipball/e3fb5b9d838c70de1a4d2f3c80d53b303bc40e49",
+                "reference": "e3fb5b9d838c70de1a4d2f3c80d53b303bc40e49",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +189,7 @@
                 "source": "https://github.com/CPNV-ES/oopers-maw-framework/tree/develop",
                 "issues": "https://github.com/CPNV-ES/oopers-maw-framework/issues"
             },
-            "time": "2023-11-10T07:33:27+00:00"
+            "time": "2023-11-15T09:34:41+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",

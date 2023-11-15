@@ -2,9 +2,9 @@
 
 namespace App\Models\Entities;
 
-enum QuestionKind
+enum QuestionKind: string
 {
-    case SingeLineText;
-    case ListOfSingleLines;
-    case MultilineText;
+    case SingeLineText = 'SingeLineText';
+    case ListOfSingleLines = 'ListOfSingleLines';
+    case MultilineText = 'MultilineText;
 }

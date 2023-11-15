@@ -12,8 +12,8 @@ class Questionnaire
     private int $id;
     #[Column("title")]
     private string $title;
-    #[Column("questionnaire_state_id")]
-    private QuestionnaireState $state;
+    #[Column("state")]
+    private QuestionnaireState $state = QuestionnaireState::Building;
 
     public function getId(): int
     {
