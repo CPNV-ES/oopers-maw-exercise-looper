@@ -48,6 +48,7 @@ class Exercises extends Controller
     #[Route("", name: 'show')]
     public function showExercisesList(): Response
     {
+        $questionnaires = DBOperationsProvider::GetUnique()->fetchAll(Questionnaire::class);
         return $this->render('exercises.management.list');
     }
 
