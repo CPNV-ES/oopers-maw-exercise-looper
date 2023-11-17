@@ -55,7 +55,7 @@ class Exercises extends Controller
     #[Route("/[:exerciceId]", name: 'update', methods: [HTTPMethod::PUT])]
     public function changExerciceInfo(int $exerciceId): Response
     {
-        $questionnaire = DBOperationsProvider::GetUnique()->fetchOne(Questionnaire::class,$exerciceId);
+        $questionnaire = DBOperationsProvider::GetUnique()->fetchOne(Questionnaire::class,["id"=>$exerciceId]);
         return $this->redirectToRoute("exercises.show");
     }
 

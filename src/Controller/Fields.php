@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Models\Entities\Questionnaire;
+use App\Models\Services\DBOperationsProvider;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
 use MVC\Http\Response\Response;
@@ -14,6 +16,7 @@ class Fields extends Controller
     #[Route("/", name: "show")]
     public function showExerciseFields(int $exerciceId): Response
     {
+        $questionnaire = DBOperationsProvider::GetUnique()->fetchOne(Questionnaire::class,["id"=>$exerciceId]);
         return $this->render('exercises.creation.fields',["exerciceId"=>$exerciceId]);
     }
 
