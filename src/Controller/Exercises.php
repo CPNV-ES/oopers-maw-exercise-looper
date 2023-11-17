@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Models\Entities\Questionnaire;
 use App\Models\Services\DBOperationsProvider;
-use App\Models\Services\PDOConnector;
 use MVC\Http\Controller\Controller;
+use MVC\Http\Exception\NotFoundException;
 use MVC\Http\HTTPMethod;
 use MVC\Http\Response\Response;
 use MVC\Http\Routing\Annotation\Route;
@@ -55,12 +55,14 @@ class Exercises extends Controller
     #[Route("/[:exerciceId]", name: 'update', methods: [HTTPMethod::PUT])]
     public function changExerciceInfo(int $exerciceId): Response
     {
+        $questionnaire = DBOperationsProvider::GetUnique()->fetchOne(Questionnaire::class,$exerciceId);
         return $this->redirectToRoute("exercises.show");
     }
 
     #[Route("/[:exerciceId]", name: 'delete', methods: [HTTPMethod::DELETE])]
     public function deleteExercise(int $exerciceId): Response
     {
+        DBOperationsProvider::GetUnique()->delete(Questionnaire::class,$exerciceId);
         return $this->redirectToRoute("exercises.show");
     }
 }

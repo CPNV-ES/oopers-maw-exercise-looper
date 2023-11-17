@@ -147,12 +147,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CPNV-ES/oopers-maw-framework.git",
-                "reference": "e3fb5b9d838c70de1a4d2f3c80d53b303bc40e49"
+                "reference": "c57baf1d60be6b6ca71f712f90c0e1bebdd36219"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CPNV-ES/oopers-maw-framework/zipball/e3fb5b9d838c70de1a4d2f3c80d53b303bc40e49",
-                "reference": "e3fb5b9d838c70de1a4d2f3c80d53b303bc40e49",
+                "url": "https://api.github.com/repos/CPNV-ES/oopers-maw-framework/zipball/c57baf1d60be6b6ca71f712f90c0e1bebdd36219",
+                "reference": "c57baf1d60be6b6ca71f712f90c0e1bebdd36219",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +189,7 @@
                 "source": "https://github.com/CPNV-ES/oopers-maw-framework/tree/develop",
                 "issues": "https://github.com/CPNV-ES/oopers-maw-framework/issues"
             },
-            "time": "2023-11-15T09:34:41+00:00"
+            "time": "2023-11-17T07:43:18+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -241,7 +241,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.3.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.4.0"
             },
             "funding": [
                 {
@@ -1059,12 +1059,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "14ceade798881f984408ec950146e2d071706356"
+                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/14ceade798881f984408ec950146e2d071706356",
-                "reference": "14ceade798881f984408ec950146e2d071706356",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/84838eed9ded511f61dc3e8b5944a52d9017b297",
+                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297",
                 "shasum": ""
             },
             "require": {
@@ -1122,7 +1122,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/main"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.8"
             },
             "funding": [
                 {
@@ -1130,7 +1130,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-09T06:48:40+00:00"
+            "time": "2023-11-15T13:31:15+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2810,7 +2810,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.3.0"
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.4.0"
             },
             "funding": [
                 {
@@ -3562,7 +3562,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/main"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.4.0"
             },
             "funding": [
                 {
@@ -3644,7 +3644,7 @@
         },
         {
             "name": "symfony/string",
-            "version": "7.0.x-dev",
+            "version": "7.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
@@ -3710,7 +3710,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/7.0"
+                "source": "https://github.com/symfony/string/tree/v7.0.0-RC1"
             },
             "funding": [
                 {
