@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use ORM as ORM;
 
-#[ORM\Table()]
+#[ORM\Table('fillings')]
 class Filling
 {
 
