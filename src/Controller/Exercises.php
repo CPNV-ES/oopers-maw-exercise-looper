@@ -2,27 +2,40 @@
 
 namespace App\Controller;
 
+use App\Entity\Exercise;
+use App\Form\ExerciseForm;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
+use MVC\Http\HTTPStatus;
 use MVC\Http\Response\Response;
 use MVC\Http\Routing\Annotation\Route;
+use ORM\SQLOperations;
 
 
 #[Route("/exercises", name:"exercises.")]
 class Exercises extends Controller
 {
     /*-- CREATION --*/
-    #[Route("/new", name: 'new')]
-    public function showExerciseCreation(): Response
+    #[Route("/new", name: 'new', methods: [HTTPMethod::GET, HTTPMethod::POST])]
+    public function new(SQLOperations $operations): Response
     {
-        return $this->render('exercises.creation.new-exercice');
+        $exercise = new Exercise();
+        $form = new ExerciseForm($exercise);
+        $form->handleRequest($this->request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $id = $operations->create($exercise);
+            return $this->redirectToRoute('exercises.fields.show', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('exercises.creation.new-exercise', ['form' => $form->renderView()]);
     }
 
     #[Route("", name: 'create', methods: [HTTPMethod::POST])]
     public function createExercise(): Response
     {
         $id = 0;//TODO : The id of exercise created
-        return $this->redirectToRoute("exercises.fields.show",["exerciceId"=>$id]);
+        return $this->redirectToRoute("exercises.fields.show",["e_id"=>$id]);
     }
 
     /*-- ANSWERING / FULFILLMENT --*/
@@ -39,13 +52,13 @@ class Exercises extends Controller
         return $this->render('exercises.management.list');
     }
 
-    #[Route("/[:exerciceId]", name: 'update', methods: [HTTPMethod::PUT])]
+    #[Route("/[:id]", name: 'update', methods: [HTTPMethod::PUT])]
     public function changExerciceInfo(int $exerciceId): Response
     {
         return $this->redirectToRoute("exercises.show");
     }
 
-    #[Route("/[:exerciceId]", name: 'delete', methods: [HTTPMethod::DELETE])]
+    #[Route("/[:id]", name: 'delete', methods: [HTTPMethod::DELETE])]
     public function deleteExercise(int $exerciceId): Response
     {
         return $this->redirectToRoute("exercises.show");
