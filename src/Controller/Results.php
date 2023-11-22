@@ -2,6 +2,11 @@
 
 namespace App\Controller;
 
+use App\Models\Entities\Answer;
+use App\Models\Entities\Filling;
+use App\Models\Entities\Question;
+use App\Models\Entities\Questionnaire;
+use App\Models\Services\DBOperationsProvider;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
 use MVC\Http\Response\Response;
@@ -20,6 +25,8 @@ class Results extends Controller
     #[Route("/[:resultId]", name: 'show-question')]
     public function showExerciceResult(int $exerciceId, int $resultId): Response
     {
-        return $this->render('exercises.management.results-by-question',["exerciceId"=>$exerciceId,"resultId"=>$resultId]);
+        $question = DBOperationsProvider::GetUnique()->fetchOneOrThrow(Question::class,["questionnaires_id"=>$exerciceId]);
+        $answers = DBOperationsProvider::GetUnique()->fetchAll(Answer::class,["questions_id"=>$question->GetId()]);
+        return $this->render('exercises.management.results-by-question',["question"=>$question,"answers"=>$answers]);
     }
 }

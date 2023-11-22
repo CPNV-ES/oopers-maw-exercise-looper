@@ -6,5 +6,5 @@ enum QuestionKind: string
 {
     case SingeLineText = 'SingeLineText';
     case ListOfSingleLines = 'ListOfSingleLines';
-    case MultilineText = 'MultilineText;
+    case MultilineText = 'MultilineText';
 }

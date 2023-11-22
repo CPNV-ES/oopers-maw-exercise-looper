@@ -13,7 +13,7 @@ class Filling
     #[Column("questionnaires_id")]
     private Questionnaire $questionnaire;
     #[Column("submission_date")]
-    private DateTime $submissionDate;
+    private string $submissionDate;
 
     public function getId(): int
     {
@@ -35,12 +35,12 @@ class Filling
         $this->questionnaire = $questionnaire;
     }
 
-    public function getSubmissionDate(): DateTime
+    public function getSubmissionDate(): string
     {
         return $this->submissionDate;
     }
 
-    public function setSubmissionDate(DateTime $submissionDate): void
+    public function setSubmissionDate(string $submissionDate): void
     {
         $this->submissionDate = $submissionDate;
     }
