@@ -31,7 +31,7 @@ class Fields extends Controller
 
         $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $e_id]);
 
-        return $this->render('exercises.creation.fields',[
+        return $this->render('exercises.field.index',[
             'exercise' => $exercise,
             'questions' => $questions,
             'form' => $form->renderView()

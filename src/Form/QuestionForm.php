@@ -13,7 +13,7 @@ class QuestionForm extends AbstractForm
     public function __construct(object $entity)
     {
         parent::__construct($entity);
-        $this->addOption('view_template', 'exercises/creation/field-form');
+        $this->addOption('view_template', 'exercises/field/form');
         $this->buildForm();
     }
 

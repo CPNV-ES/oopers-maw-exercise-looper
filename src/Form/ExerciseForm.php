@@ -11,7 +11,7 @@ class ExerciseForm extends AbstractForm
     public function __construct(object $entity)
     {
         parent::__construct($entity);
-        $this->addOption('view_template', 'exercises/creation/new-form');
+        $this->addOption('view_template', 'exercises/form');
         $this->buildForm();
     }
 

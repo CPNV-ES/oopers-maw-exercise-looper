@@ -28,7 +28,7 @@ class Exercises extends Controller
             return $this->redirectToRoute('exercises.fields.show', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
         }
 
-        return $this->render('exercises.creation.new-exercise', ['form' => $form->renderView()]);
+        return $this->render('exercises/new', ['form' => $form->renderView()]);
     }
 
     #[Route("", name: 'create', methods: [HTTPMethod::POST])]
