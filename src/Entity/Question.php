@@ -12,10 +12,10 @@ class Question
     private int $id;
 
     #[ORM\Column('statement')]
-    private string $statement;
+    private ?string $statement = null;
 
     #[ORM\Column('kind')]
-    private string $kind;
+    private ?string $kind = null;
 
     #[ORM\Column('questionnaires_id')]
     private int|Exercise $questionnaire;
@@ -31,7 +31,7 @@ class Question
         return $this;
     }
 
-    public function getStatement(): string
+    public function getStatement(): ?string
     {
         return $this->statement;
     }
@@ -42,7 +42,7 @@ class Question
         return $this;
     }
 
-    public function getKind(): string
+    public function getKind(): ?string
     {
         return $this->kind;
     }

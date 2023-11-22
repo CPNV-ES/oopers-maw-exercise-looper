@@ -15,7 +15,7 @@ class Exercise
     private string $state = "Building";
 
     #[ORM\Column('title')]
-    private string $title;
+    private ?string $title = null;
 
     public function getId(): int
     {
@@ -39,7 +39,7 @@ class Exercise
         return $this;
     }
 
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }

@@ -2,25 +2,40 @@
 
 namespace App\Controller;
 
+use App\Entity\Exercise;
+use App\Entity\Question;
+use App\Form\QuestionForm;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
+use MVC\Http\HTTPStatus;
 use MVC\Http\Response\Response;
 use MVC\Http\Routing\Annotation\Route;
+use ORM\SQLOperations;
 
 
 #[Route("/exercises/[:e_id]/fields", name:"exercises.fields.")]
 class Fields extends Controller
 {
-    #[Route("", name: "show")]
-    public function show(int $e_id): Response
+    #[Route("", name: "show", methods: [HTTPMethod::GET, HTTPMethod::POST])]
+    public function show(int $e_id, SQLOperations $operations): Response
     {
-        return $this->render('exercises.creation.fields',["exerciceId"=>$e_id]);
-    }
+        $exercise = $operations->fetchOne(Exercise::class, ['id' => $e_id]);
+        $question = (new Question())->setQuestionnaire($exercise);
+        $form = new QuestionForm($question);
+        $form->handleRequest($this->request);
 
-    #[Route("/", name: "create", methods: [HTTPMethod::POST])]
-    public function createExerciseField(int $e_id): Response
-    {
-        return $this->render('exercises.creation.fields',["exerciceId"=>$e_id]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $operations->create($question);
+            return $this->redirectToRoute('exercises.fields.show', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
+        }
+
+        $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $e_id]);
+
+        return $this->render('exercises.creation.fields',[
+            'exercise' => $exercise,
+            'questions' => $questions,
+            'form' => $form->renderView()
+        ]);
     }
 
     #[Route("/[:fieldId]/edit", name: 'edit')]
