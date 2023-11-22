@@ -33,16 +33,20 @@ class Exercises extends Controller
 
     /*-- ANSWERING / FULFILLMENT --*/
     #[Route("/answering", name: 'answering')]
-    public function index(): Response
+    public function answering(): Response
     {
         return $this->render('exercises.answering.list');
     }
 
     /*-- MANAGEMENT / RESULTS --*/
-    #[Route("", name: 'show')]
-    public function showExercisesList(): Response
+    #[Route("", name: 'index')]
+    public function index(SQLOperations $operations): Response
     {
-        return $this->render('exercises.management.list');
+        return $this->render('exercises/index', [
+            'building' => $operations->fetchAll(Exercise::class, ['state' => 'Building']),
+            'answering' => $operations->fetchAll(Exercise::class, ['state' => 'Answering']),
+            'closed' => $operations->fetchAll(Exercise::class, ['state' => 'Closed']),
+        ]);
     }
 
     #[Route("/[:id]", name: 'update', methods: [HTTPMethod::PUT])]

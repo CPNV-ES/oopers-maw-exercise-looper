@@ -16,8 +16,8 @@ use ORM\SQLOperations;
 #[Route("/exercises/[:e_id]/fields", name:"exercises.fields.")]
 class Fields extends Controller
 {
-    #[Route("", name: "show", methods: [HTTPMethod::GET, HTTPMethod::POST])]
-    public function show(int $e_id, SQLOperations $operations): Response
+    #[Route("", name: "index", methods: [HTTPMethod::GET, HTTPMethod::POST])]
+    public function index(int $e_id, SQLOperations $operations): Response
     {
         $exercise = $operations->fetchOne(Exercise::class, ['id' => $e_id]);
         $question = (new Question())->setQuestionnaire($exercise);
@@ -26,7 +26,7 @@ class Fields extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $operations->create($question);
-            return $this->redirectToRoute('exercises.fields.show', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('exercises.fields.index', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
         }
 
         $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $e_id]);
@@ -38,10 +38,25 @@ class Fields extends Controller
         ]);
     }
 
-    #[Route("/[:fieldId]/edit", name: 'edit')]
-    public function showFieldEdition(int $e_id, int $fieldId): Response
+    #[Route("/[:fieldId]/edit", name: 'edit', methods: [HTTPMethod::GET, HTTPMethod::POST])]
+    public function edit(int $e_id, int $fieldId, SQLOperations $operations): Response
     {
-        return $this->render('exercises.creation.field-edit',["exerciceId"=>$e_id,"fieldId"=>$fieldId]);
+        $exercise = $operations->fetchOne(Exercise::class, ['id' => $e_id]);
+        $question = $operations->fetchOne(Question::class, ['id' => $fieldId]);
+        $form = new QuestionForm($question);
+        $form->handleRequest($this->request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $operations->update($question);
+            return $this->redirectToRoute('exercises.fields.index', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
+        }
+
+        $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $e_id]);
+
+        return $this->render('exercises.field.edit',[
+            'exercise' => $exercise,
+            'form' => $form->renderView()
+        ]);
     }
 
     #[Route("[:fieldId]", name: 'update', methods: [HTTPMethod::POST])]
