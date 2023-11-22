@@ -31,13 +31,6 @@ class Exercises extends Controller
         return $this->render('exercises/new', ['form' => $form->renderView()]);
     }
 
-    #[Route("", name: 'create', methods: [HTTPMethod::POST])]
-    public function createExercise(): Response
-    {
-        $id = 0;//TODO : The id of exercise created
-        return $this->redirectToRoute("exercises.fields.show",["e_id"=>$id]);
-    }
-
     /*-- ANSWERING / FULFILLMENT --*/
     #[Route("/answering", name: 'answering')]
     public function index(): Response
