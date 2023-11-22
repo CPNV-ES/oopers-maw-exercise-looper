@@ -4,7 +4,7 @@ namespace App\Form;
 
 use MVC\Form\AbstractForm;
 use MVC\Form\Field\ChoiceField;
-use MVC\Form\Field\ChoiceParam;
+use MVC\Form\Field\ChoiceOption;
 use MVC\Form\Field\TextField;
 
 class QuestionForm extends AbstractForm
@@ -38,9 +38,9 @@ class QuestionForm extends AbstractForm
     private function getChoices(): array
     {
         return [
-            new ChoiceParam('Answering', 'Single line text'),
-            new ChoiceParam('ListOfSingleLines', 'List of single lines'),
-            new ChoiceParam('MultilineText', 'Multi-line text'),
+            new ChoiceOption('Answering', 'Single line text'),
+            new ChoiceOption('ListOfSingleLines', 'List of single lines'),
+            new ChoiceOption('MultilineText', 'Multi-line text'),
         ];
     }
 }
