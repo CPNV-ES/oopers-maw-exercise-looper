@@ -19,9 +19,9 @@
                         <td><?= $question->getStatement() ?></td>
                         <td><?= $question->getKind() ?></td>
                         <td>
-                            <a title="Edit" href="<?= $this->url("exercises.fields.edit", ["e_id" => $this->exercise->getId(), "fieldId" => 1])?>"><i class="fa fa-edit"></i></a>
+                            <a title="Edit" href="<?= $this->url("exercises.fields.edit", ["e_id" => $this->exercise->getId(), "fieldId" => $question->getId()])?>"><i class="fa fa-edit"></i></a>
                             <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                               href="<?= $this->url("exercises.fields.delete", ["e_id" => $this->exercise->getId(), "fieldId" => 1])?>"><i class="fa fa-trash"></i></a>
+                               href="<?= $this->url("exercises.fields.delete", ["e_id" => $this->exercise->getId(), "fieldId" => $question->getId()])?>"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
