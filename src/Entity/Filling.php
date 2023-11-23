@@ -14,6 +14,11 @@ class Filling
     #[ORM\Column('questionnaires_id')]
     private int|Exercise $exercise;
 
+    /**
+     * @var Answer[]
+     */
+    private array $answers = [];
+
     #[ORM\Column('submission_date')]
     private \DateTimeImmutable $submission_date;
 
@@ -47,6 +52,23 @@ class Filling
     public function setSubmissionDate(\DateTimeImmutable $submission_date): Filling
     {
         $this->submission_date = $submission_date;
+        return $this;
+    }
+
+    public function getAnswers(): array
+    {
+        return $this->answers;
+    }
+
+    public function setAnswers(array $answers): Filling
+    {
+        $this->answers = $answers;
+        return $this;
+    }
+
+    public function addAnswer(Answer $answer): Filling
+    {
+        $this->answers[] = $answer;
         return $this;
     }
 
