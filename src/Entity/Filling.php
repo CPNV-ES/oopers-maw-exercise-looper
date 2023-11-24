@@ -20,7 +20,12 @@ class Filling
     private array $answers = [];
 
     #[ORM\Column('submission_date')]
-    private \DateTimeImmutable $submission_date;
+    private string $submission_date;
+
+    public function __construct()
+    {
+        $this->setSubmissionDate((new \DateTimeImmutable())->format('c'));
+    }
 
     public function getId(): int
     {
@@ -44,12 +49,12 @@ class Filling
         return $this;
     }
 
-    public function getSubmissionDate(): \DateTimeImmutable
+    public function getSubmissionDate(): string
     {
         return $this->submission_date;
     }
 
-    public function setSubmissionDate(\DateTimeImmutable $submission_date): Filling
+    public function setSubmissionDate(string $submission_date): Filling
     {
         $this->submission_date = $submission_date;
         return $this;
