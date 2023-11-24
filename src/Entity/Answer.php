@@ -12,7 +12,7 @@ class Answer
     private int $id;
 
     #[ORM\Column('content')]
-    private string $content;
+    private ?string $content = null;
 
     #[ORM\Column('fillings_id')]
     private int|Filling $filling;
@@ -31,7 +31,7 @@ class Answer
         return $this;
     }
 
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
