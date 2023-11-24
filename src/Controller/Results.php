@@ -31,7 +31,7 @@ class Results extends Controller
     #[Route("/[:resultId]", name: 'show-question')]
     public function showExerciceResult(int $exerciceId, int $resultId): Response
     {
-        $question = DBOperationsProvider::GetUnique()->fetchOneOrThrow(Question::class,["questionnaires_id"=>$exerciceId]);
+        $question = DBOperationsProvider::GetUnique()->fetchOneOrThrow(Question::class,["id"=>$resultId]);
         $answers = DBOperationsProvider::GetUnique()->fetchAll(Answer::class,["questions_id"=>$question->GetId()]);
         return $this->render('exercises.management.results-by-question',["question"=>$question,"answers"=>$answers]);
     }
