@@ -55,4 +55,11 @@ class Answer
     {
         $this->question = $question;
     }
+
+    public function getContentLenghtValidation(): ContentLenghtValidation
+    {
+        if($this->content >= 10) return ContentLenghtValidation::VeryGood;
+        if($this->content > 0) return ContentLenghtValidation::Sufficient;
+        return ContentLenghtValidation::NotGoodEnough;
+    }
 }
