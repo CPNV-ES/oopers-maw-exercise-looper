@@ -15,7 +15,7 @@
         <tbody>
             <?php foreach($this->fulfillments as $fulfillment): ?>
             <tr>
-                <td><a href="<?=$this->url("exercises.fulfillments.show",["exerciceId"=>$this->exerciceId,"fulfillmentId"=>$fulfillment->GetId()])?>"><?=$fulfillment->getSubmissionDate()?></a></td>
+                <td><a href="<?=$this->url("exercises.fulfillments.show",["exerciceId"=>$this->exerciceId,"fulfillmentId"=>$fulfillment->GetId()])?>"><?=$fulfillment->getSubmissionDate()->format("d.m.o G:s")?></a></td>
                 <?php foreach($this->answers[$fulfillment->GetId()] as $answerForFulfillment): ?>
                     <?php switch ($answerForFulfillment->getContentLenghtValidation()):
                         case ContentLenghtValidation::VeryGood: ?>
