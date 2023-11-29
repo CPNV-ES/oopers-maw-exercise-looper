@@ -38,7 +38,7 @@ class QuestionForm extends AbstractForm
     private function getChoices(): array
     {
         return [
-            new ChoiceOption('Answering', 'Single line text'),
+            new ChoiceOption('SingleLine', 'Single line text'),
             new ChoiceOption('ListOfSingleLines', 'List of single lines'),
             new ChoiceOption('MultilineText', 'Multi-line text'),
         ];
