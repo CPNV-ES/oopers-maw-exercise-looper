@@ -41,7 +41,7 @@ class Exercises extends Controller
     public function index(): Response
     {
         $questionnaires = DBOperationsProvider::GetUnique()->fetchAll(Questionnaire::class);
-        return $this->render('exercises.answering.list');
+        return $this->render('exercises.answering.list',["questionnaires"=>$questionnaires]);
     }
 
     /*-- MANAGEMENT / RESULTS --*/
