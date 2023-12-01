@@ -8,6 +8,10 @@ use ORM as ORM;
 class Question
 {
 
+    const MULTILINE_TYPE = 'MultilineText';
+    const MULTI_SINGLE_LINE_TYPE = 'ListOfSingleLines';
+    const SINGLE_LINE_TYPE = 'SingleLine';
+
     #[ORM\Column('id')]
     private int $id;
 

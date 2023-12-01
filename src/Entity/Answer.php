@@ -64,5 +64,9 @@ class Answer
         return $this;
     }
 
+    public function isMultiline(): bool
+    {
+        return in_array($this->question->getKind(), [Question::MULTI_SINGLE_LINE_TYPE, Question::MULTILINE_TYPE]);
+    }
 
 }

@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Answer;
 use MVC\Form\AbstractForm;
 use MVC\Form\Field\EntityField;
+use MVC\Form\Field\TextAreaField;
+use MVC\Form\Field\TextField;
 
 class FillingForm extends AbstractForm
 {
@@ -25,6 +27,10 @@ class FillingForm extends AbstractForm
                 'entity_value' => 'content',
                 'entity_identifier' => 'question.id',
                 'entity_label' => 'question',
+                'entity_type' => function (Answer $answer) {
+                    if ($answer->isMultiline()) return TextAreaField::class;
+                    return TextField::class;
+                },
                 'attributes' => [
                     'class' => ['field']
                 ]
