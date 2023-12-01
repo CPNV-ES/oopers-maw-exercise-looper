@@ -67,6 +67,9 @@ class Exercises extends Controller
     public function changExerciceInfo(int $exerciceId): Response
     {
         $questionnaire = DBOperationsProvider::GetUnique()->fetchOne(Questionnaire::class,["id"=>$exerciceId]);
+        if($this->request->query->get("state") !== null)
+            $questionnaire->setState(QuestionnaireState::from($this->request->query->get("state")));
+        DBOperationsProvider::GetUnique()->update($questionnaire);
         return $this->redirectToRoute("exercises.show");
     }
 

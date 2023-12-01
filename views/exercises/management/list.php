@@ -21,7 +21,7 @@
                             <td><?= $questionnaire->GetTitle() ?></td>
                             <td>
                                 <?php if($questionnaire->canBeReadyForAnswers($this->questionCountByQuestionnaires[$questionnaire->GetId()]??0)) : ?>
-                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="/exercises/91?exercise%5Bstatus%5D=answering">
+                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="<?=$this->url("exercises.update",["exerciceId"=>$questionnaire->GetId()])."?state=".\App\Models\Entities\QuestionnaireState::Answering->value?>">
                                     <i class="fa fa-comment"></i>
                                 </a>
                                 <?php endif; ?>
@@ -39,12 +39,12 @@
                                 <?php endif; ?>
 
                                 <?php if($questionnaire->canShowResults()) : ?>
-                                <a title="Show results" href="<?=$this->url("exercises.results.show",["exerciceId"=>91])?>"><i class="fa fa-chart-bar"></i></a>
+                                <a title="Show results" href="<?=$this->url("exercises.results.show",["exerciceId"=>$questionnaire->GetId()])?>"><i class="fa fa-chart-bar"></i></a>
                                 <?php endif; ?>
 
                                 <?php if($questionnaire->canClose()) : ?>
                                 <a title="Close" rel="nofollow" data-method="put"
-                                   href="/exercises/7?exercise%5Bstatus%5D=closed"><i class="fa fa-minus-circle"></i></a>
+                                   href="<?=$this->url("exercises.update",["exerciceId"=>$questionnaire->GetId()])."?state=".\App\Models\Entities\QuestionnaireState::Closed->value?>"><i class="fa fa-minus-circle"></i></a>
                                 <?php endif; ?>
                             </td>
                         </tr>
