@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Models\Entities\Question;
 use App\Models\Entities\Questionnaire;
+use App\Models\Entities\QuestionnaireState;
 use App\Models\Services\DBOperationsProvider;
 use MVC\Http\Controller\Controller;
 use MVC\Http\Exception\NotFoundException;
@@ -40,7 +42,7 @@ class Exercises extends Controller
     #[Route("/answering", name: 'answering')]
     public function index(): Response
     {
-        $questionnaires = DBOperationsProvider::GetUnique()->fetchAll(Questionnaire::class);
+        $questionnaires = DBOperationsProvider::GetUnique()->fetchAll(Questionnaire::class,["state"=>QuestionnaireState::Answering->value]);
         return $this->render('exercises.answering.list',["questionnaires"=>$questionnaires]);
     }
 
@@ -49,7 +51,16 @@ class Exercises extends Controller
     public function showExercisesList(): Response
     {
         $questionnaires = DBOperationsProvider::GetUnique()->fetchAll(Questionnaire::class);
-        return $this->render('exercises.management.list');
+        $questionnairesStateMap = Questionnaire::arrangeQuestionnairesByCategoryMap($questionnaires);
+        $questions = DBOperationsProvider::GetUnique()->fetchAll(Question::class);
+        //TODO : REMOVED THIS HACK OMG
+        $questionCountByQuestionnaires = [];
+        foreach ($questions as $question){
+            if(!isset($questionCountByQuestionnaires[$question->getQuestionnaire()->getId()]))
+                $questionCountByQuestionnaires[$question->getQuestionnaire()->getId()] = 0;
+            $questionCountByQuestionnaires[$question->getQuestionnaire()->getId()]++;
+        }
+        return $this->render('exercises.management.list',["questionnairesStateMap"=>$questionnairesStateMap,"questionCountByQuestionnaires"=>$questionCountByQuestionnaires]);
     }
 
     #[Route("/[:exerciceId]", name: 'update', methods: [HTTPMethod::PUT])]
