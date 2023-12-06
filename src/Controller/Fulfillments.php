@@ -21,7 +21,7 @@ class Fulfillments extends Controller
     #[Route("/new", name: 'new', methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function new(int $exerciseId, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOne(Exercise::class, ['id' => $exerciseId]);
+        $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $exerciseId]);
         $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $exercise->getId()]);
         $filling = (new Filling())
             ->setExercise($exercise)
