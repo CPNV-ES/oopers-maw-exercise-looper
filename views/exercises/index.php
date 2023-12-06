@@ -18,9 +18,9 @@
                     <td>
                         <a title="Be ready for answers" rel="nofollow" data-method="put"
                            href="/exercises/91?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
-                        <a title="Manage fields" href="<?=$this->url("exercises.fields.show",["exerciceId"=>91])?>"><i class="fa fa-edit"></i></a>
+                        <a title="Manage fields" href="<?=$this->url("exercises.fields.index",["e_id"=>91])?>"><i class="fa fa-edit"></i></a>
                         <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                           href="<?=$this->url("exercises.delete",["exerciceId"=>91])?>"><i class="fa fa-trash"></i></a>
+                           href="<?=$this->url("exercises.delete",["id"=>91])?>"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
                 <tr>
