@@ -56,4 +56,16 @@ class Exercise
         return $this;
     }
 
+    public function getQuestions(): array
+    {
+        return $this->questions;
+    }
+
+    public function setQuestions(array $questions): Exercise
+    {
+        $this->questions = $questions;
+        return $this;
+    }
+
+
 }

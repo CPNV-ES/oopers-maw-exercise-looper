@@ -21,13 +21,12 @@ class Fulfillments extends Controller
     #[Route("/new", name: 'new', methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function new(int $exerciseId, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOne(Exercise::class, ['id' => $exerciseId]);
-        $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $exercise->getId()]);
+        $exercise = $operations->fetchOne(Exercise::class, ['id' => $exerciseId], true);
         $filling = (new Filling())
             ->setExercise($exercise)
             ->setAnswers(array_map(function ($question) {
                 return (new Answer())->setQuestion($question);
-            }, $questions));
+            }, $exercise->getQuestions()));
 
         $form = new FillingForm($filling);
         $form->handleRequest($this->request);
