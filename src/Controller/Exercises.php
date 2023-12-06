@@ -25,7 +25,7 @@ class Exercises extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $id = $operations->create($exercise);
-            return $this->redirectToRoute('exercises.fields.show', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('exercises.fields.index', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
         }
 
         return $this->render('exercises/new', ['form' => $form->renderView()]);
