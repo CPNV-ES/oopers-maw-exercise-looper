@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use ORM as ORM;
+use ORM\Mapping as ORM;
 
 #[ORM\Table('questions')]
 class Question
