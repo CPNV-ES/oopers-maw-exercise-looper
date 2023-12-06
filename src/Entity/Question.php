@@ -10,7 +10,7 @@ class Question
 
     const MULTILINE_TYPE = 'MultilineText';
     const MULTI_SINGLE_LINE_TYPE = 'ListOfSingleLines';
-    const SINGLE_LINE_TYPE = 'SingleLine';
+    const SINGLE_LINE_TYPE = 'SingleLineText';
 
     #[ORM\Column('id')]
     private int $id;
