@@ -17,6 +17,12 @@ class Exercise
     #[ORM\Column('title')]
     private ?string $title = null;
 
+    /**
+     * @var Question[]
+     */
+    #[ORM\HasMany(entity: Question::class, targetProperty: 'questionnaire')]
+    private array $questions = [];
+
     public function getId(): int
     {
         return $this->id;

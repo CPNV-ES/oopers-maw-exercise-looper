@@ -22,7 +22,14 @@ class Question
     private ?string $kind = null;
 
     #[ORM\Column('questionnaires_id')]
+    #[ORM\BelongsTo(inversedBy: 'questions')]
     private int|Exercise $questionnaire;
+
+    /**
+     * @var Answer[]
+     */
+    #[ORM\HasMany(entity: Answer::class, targetProperty: 'question')]
+    private array $answers = [];
 
     public function getId(): int
     {

@@ -17,6 +17,7 @@ class Filling
     /**
      * @var Answer[]
      */
+    #[ORM\HasMany(entity: Answer::class, targetProperty: 'filling')]
     private array $answers = [];
 
     #[ORM\Column('submission_date')]

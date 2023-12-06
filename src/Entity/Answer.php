@@ -15,9 +15,11 @@ class Answer
     private ?string $content = null;
 
     #[ORM\Column('fillings_id')]
+    #[ORM\BelongsTo(inversedBy: 'answers')]
     private int|Filling $filling;
 
     #[ORM\Column('questions_id')]
+    #[ORM\BelongsTo(inversedBy: 'answers')]
     private int|Question $question;
 
     public function getId(): int
