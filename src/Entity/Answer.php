@@ -72,10 +72,10 @@ class Answer
 
     public function getContentLenghtValidation(): ContentLenghtValidation
     {
-        if ($this->content >= 10) {
+        if (mb_strlen($this->content) >= 10) {
             return ContentLenghtValidation::VeryGood;
         }
-        if ($this->content > 0) {
+        if (mb_strlen($this->content) > 0) {
             return ContentLenghtValidation::Sufficient;
         }
         return ContentLenghtValidation::NotGoodEnough;

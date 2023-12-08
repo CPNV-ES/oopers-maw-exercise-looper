@@ -71,8 +71,10 @@ class Fulfillments extends Controller
     }
 
     #[Route("/[:fulfillmentId]", name: 'show')]
-    public function showFulfillment(int $e_id, int $fulfillmentId): Response
+    public function showFulfillment(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
-        return $this->render('exercises.management.results-by-fulfillment');
+        $filling = $operations->fetchOne(Filling::class,["id"=>$fulfillmentId]);
+        $filling->setAnswers($operations->fetchAll(Answer::class,["fillings_id"=>$fulfillmentId]));
+        return $this->render('exercises.management.results-by-fulfillment',['filling'=>$filling]);
     }
 }

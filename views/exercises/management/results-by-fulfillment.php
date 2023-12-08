@@ -1,11 +1,10 @@
-<?=$this->include("partial.topbar",["title"=>"Results.php by fulfillment","type"=>"results"])?>
-
+<?=$this->include("partial.topbar",["title"=>"Results by fulfillment","type"=>"results"])?>
 <main class="container">
-    <h1>2023-09-05 14:38:00 UTC</h1>
+    <h1><?=$this->filling->getSubmissionDate()->format("d.m.o G:s")?></h1>
     <dl class="answer">
-        <dt>Décriver le polymorphisme</dt>
-        <dd>C'est en relation avec la POO</dd>
-        <dt>L'héritage c'est bien?</dt>
-        <dd>rthtrht</dd>
+    <?php foreach($this->filling->getAnswers() as $answer): ?>
+        <dt><?=$answer->getQuestion()->getStatement()?></dt>
+        <dd><?=$answer->getContent()?></dd>
+    <?php endforeach; ?>
     </dl>
 </main>

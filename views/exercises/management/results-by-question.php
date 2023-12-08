@@ -13,8 +13,8 @@
         <tbody>
         <?php foreach($this->answers as $answer): ?>
         <tr>
-            <td><a href="<?=$this->url("exercises.fulfillments.show",["exerciceId"=>$this->question->getExercise()->getId(),"fulfillmentId"=>$answer->getFilling()->getId()])?>"><?=$answer->getFilling()->getSubmissionDate()->format("d.m.o G:s")?></a></td>
-            <td><?=$answer->GetContent()?></td>
+            <td><a href="<?=$this->url("exercises.fulfillments.show",["e_id"=>$this->question->getExercise()->getId(),"fulfillmentId"=>$answer->getFilling()->getId()])?>"><?=$answer->getFilling()->getSubmissionDate()->format("d.m.o G:s")?></a></td>
+            <td><?=$answer->getContent()?></td>
         </tr>
         <?php endforeach; ?>
     </table>
