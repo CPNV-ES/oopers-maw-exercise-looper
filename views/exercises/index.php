@@ -1,116 +1,55 @@
-<?=$this->include("partial.topbar",["title"=>"Managing exercices","type"=>"results"])?>
+<?= $this->include("partial.topbar", ["title" => "Managing exercices", "type" => "results"]) ?>
 
 <main class="container">
     <div class="row">
-        <section class="column">
-            <h1>Building</h1>
-            <table class="records">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th></th>
-                </tr>
-                </thead>
+        <?php foreach (\App\Entity\ExerciseState::cases() as $state): ?>
+        <?php $questionnaires = $this->questionnairesStateMap[$state->value]??[];?>
+            <section class="column">
+                <h1><?= $state->value ?></h1>
+                <table class="records">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($questionnaires as $questionnaire): ?>
+                        <tr>
+                            <td><?= $questionnaire->GetTitle() ?></td>
+                            <td>
+                                <?php if($questionnaire->canBeReadyForAnswers($this->questionCountByQuestionnaires[$questionnaire->GetId()]??0)) : ?>
+                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\QuestionnaireState::Answering->value?>">
+                                    <i class="fa fa-comment"></i>
+                                </a>
+                                <?php endif; ?>
 
-                <tbody>
-                <tr>
-                    <td>Test</td>
-                    <td>
-                        <a title="Be ready for answers" rel="nofollow" data-method="put"
-                           href="/exercises/91?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
-                        <a title="Manage fields" href="<?=$this->url("exercises.fields.index",["e_id"=>91])?>"><i class="fa fa-edit"></i></a>
-                        <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                           href="<?=$this->url("exercises.delete",["id"=>91])?>"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>C# Level</td>
-                    <td>
-                        <a title="Manage fields" href="/exercises/44/fields"><i class="fa fa-edit"></i></a>
-                        <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                           href="/exercises/44"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>MinusTester</td>
-                    <td>
-                        <a title="Manage fields" href="/exercises/54/fields"><i class="fa fa-edit"></i></a>
-                        <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                           href="/exercises/54"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
+                                <?php if($questionnaire->canManageFields()) : ?>
+                                <a title="Manage fields"
+                                   href="<?= $this->url("exercises.fields.index", ["e_id" => $questionnaire->GetId()]) ?>"><i
+                                            class="fa fa-edit"></i></a>
+                                <?php endif; ?>
 
-        <section class="column">
-            <h1>Answering</h1>
-            <table class="records">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th></th>
-                </tr>
-                </thead>
+                                <?php if($questionnaire->canDeleteFields()) : ?>
+                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
+                                   href="<?= $this->url("exercises.delete", ["id" => $questionnaire->GetId()]) ?>"><i
+                                            class="fa fa-trash"></i></a>
+                                <?php endif; ?>
 
-                <tbody>
-                <tr>
-                    <td>a</td>
-                    <td>
-                        <a title="Show results" href="<?=$this->url("exercises.results.show",["exerciceId"=>91])?>"><i class="fa fa-chart-bar"></i></a>
-                        <a title="Close" rel="nofollow" data-method="put"
-                           href="/exercises/7?exercise%5Bstatus%5D=closed"><i class="fa fa-minus-circle"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Linux base commands</td>
-                    <td>
-                        <a title="Show results" href="/exercises/9/results"><i class="fa fa-chart-bar"></i></a>
-                        <a title="Close" rel="nofollow" data-method="put"
-                           href="/exercises/9?exercise%5Bstatus%5D=closed"><i class="fa fa-minus-circle"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CLD2 Cloud Services</td>
-                    <td>
-                        <a title="Show results" href="/exercises/12/results"><i class="fa fa-chart-bar"></i></a>
-                        <a title="Close" rel="nofollow" data-method="put"
-                           href="/exercises/12?exercise%5Bstatus%5D=closed"><i class="fa fa-minus-circle"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
+                                <?php if($questionnaire->canShowResults()) : ?>
+                                <a title="Show results" href="<?=$this->url("exercises.results.show",["e_id"=>$questionnaire->GetId()])?>"><i class="fa fa-chart-bar"></i></a>
+                                <?php endif; ?>
 
-        <section class="column">
-            <h1>Closed</h1>
-            <table class="records">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th></th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr>
-                    <td>Scrum Guide</td>
-                    <td>
-                        <a title="Show results" href="/exercises/1/results"><i class="fa fa-chart-bar"></i></a>
-                        <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                           href="/exercises/1"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1234</td>
-                    <td>
-                        <a title="Show results" href="/exercises/5/results"><i class="fa fa-chart-bar"></i></a>
-                        <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                           href="/exercises/5"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
+                                <?php if($questionnaire->canClose()) : ?>
+                                <a title="Close" rel="nofollow" data-method="put"
+                                   href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\ExerciseState::Closed->value?>"><i class="fa fa-minus-circle"></i></a>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </section>
+        <?php endforeach; ?>
     </div>
 </main>

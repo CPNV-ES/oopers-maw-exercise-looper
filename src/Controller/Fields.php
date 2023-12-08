@@ -20,7 +20,7 @@ class Fields extends Controller
     public function index(int $e_id, SQLOperations $operations): Response
     {
         $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $e_id]);
-        $question = (new Question())->setQuestionnaire($exercise);
+        $question = (new Question())->setExercise($exercise);
         $form = new QuestionForm($question);
         $form->handleRequest($this->request);
 
@@ -59,15 +59,10 @@ class Fields extends Controller
         ]);
     }
 
-    #[Route("[:fieldId]", name: 'update', methods: [HTTPMethod::POST])]
-    public function editField(int $e_id, int $fieldId): Response
+    #[Route("/[:fieldId]", name: 'delete', methods: [HTTPMethod::DELETE])]
+    public function deleteField(int $e_id, int $fieldId, SQLOperations $operations): Response
     {
-        return $this->redirectToRoute("exercises.fields.list",["exerciceId"=>$e_id]);
-    }
-
-    #[Route("[:fieldId]", name: 'delete', methods: [HTTPMethod::DELETE])]
-    public function deleteField(int $e_id, int $fieldId): Response
-    {
-        return $this->redirectToRoute("exercises.fields.list",["exerciceId"=>$e_id,"fieldId"=>$fieldId]);
+        $operations->delete(Question::class,$fieldId);
+        return $this->redirectToRoute("exercises.fields.index",["e_id"=>$e_id,"fieldId"=>$fieldId]);
     }
 }

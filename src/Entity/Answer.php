@@ -2,23 +2,20 @@
 
 namespace App\Entity;
 
-use ORM as ORM;
+use ORM\Column;
+use ORM\Table;
 
-#[ORM\Table('answers')]
+#[Table('answers')]
 class Answer
 {
-
-    #[ORM\Column('id')]
+    #[Column("id")]
     private int $id;
-
-    #[ORM\Column('content')]
-    private ?string $content = null;
-
-    #[ORM\Column('fillings_id')]
-    private int|Filling $filling;
-
-    #[ORM\Column('questions_id')]
-    private int|Question $question;
+    #[Column("content")]
+    private string $content;
+    #[Column("fillings_id")]
+    private Filling $filling;
+    #[Column("questions_id")]
+    private Question $question;
 
     public function getId(): int
     {
@@ -31,7 +28,7 @@ class Answer
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -42,23 +39,23 @@ class Answer
         return $this;
     }
 
-    public function getFilling(): int|Filling
+    public function getFilling(): Filling
     {
         return $this->filling;
     }
 
-    public function setFilling(int|Filling $filling): Answer
+    public function setFilling(Filling $filling): Answer
     {
         $this->filling = $filling;
         return $this;
     }
 
-    public function getQuestion(): Question|int
+    public function getQuestion(): Question
     {
         return $this->question;
     }
 
-    public function setQuestion(Question|int $question): Answer
+    public function setQuestion(Question $question): Answer
     {
         $this->question = $question;
         return $this;
@@ -66,7 +63,17 @@ class Answer
 
     public function isMultiline(): bool
     {
-        return in_array($this->question->getKind(), [Question::MULTI_SINGLE_LINE_TYPE, Question::MULTILINE_TYPE]);
+        return in_array($this->question->getKind(), [QuestionKind::MultilineText,QuestionKind::ListOfSingleLines]);
     }
 
+    public function getContentLenghtValidation(): ContentLenghtValidation
+    {
+        if ($this->content >= 10) {
+            return ContentLenghtValidation::VeryGood;
+        }
+        if ($this->content > 0) {
+            return ContentLenghtValidation::Sufficient;
+        }
+        return ContentLenghtValidation::NotGoodEnough;
+    }
 }

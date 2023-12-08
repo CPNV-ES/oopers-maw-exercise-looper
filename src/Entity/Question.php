@@ -2,27 +2,20 @@
 
 namespace App\Entity;
 
-use ORM as ORM;
+use ORM\Column;
+use ORM\Table;
 
-#[ORM\Table('questions')]
+#[Table('questions')]
 class Question
 {
-
-    const MULTILINE_TYPE = 'MultilineText';
-    const MULTI_SINGLE_LINE_TYPE = 'ListOfSingleLines';
-    const SINGLE_LINE_TYPE = 'SingleLineText';
-
-    #[ORM\Column('id')]
+    #[Column("id")]
     private int $id;
-
-    #[ORM\Column('statement')]
-    private ?string $statement = null;
-
-    #[ORM\Column('kind')]
-    private ?string $kind = null;
-
-    #[ORM\Column('questionnaires_id')]
-    private int|Exercise $questionnaire;
+    #[Column("statement")]
+    private string $statement = "";
+    #[Column("kind")]
+    private QuestionKind $kind = QuestionKind::SingleLineText;
+    #[Column("questionnaires_id")]
+    private Exercise $exercise;
 
     public function getId(): int
     {
@@ -35,7 +28,7 @@ class Question
         return $this;
     }
 
-    public function getStatement(): ?string
+    public function getStatement(): string
     {
         return $this->statement;
     }
@@ -46,25 +39,28 @@ class Question
         return $this;
     }
 
-    public function getKind(): ?string
+    public function getKind(): QuestionKind
     {
         return $this->kind;
     }
 
-    public function setKind(string $kind): Question
+    public function setKind(QuestionKind|string $kind): Question
     {
-        $this->kind = $kind;
+        if(is_string($kind))
+            $this->kind = QuestionKind::from($kind);
+        else
+            $this->kind = $kind;
         return $this;
     }
 
-    public function getQuestionnaire(): Exercise|int
+    public function getExercise(): Exercise
     {
-        return $this->questionnaire;
+        return $this->exercise;
     }
 
-    public function setQuestionnaire(Exercise|int $questionnaire): Question
+    public function setExercise(Exercise $questionnaire): Question
     {
-        $this->questionnaire = $questionnaire;
+        $this->exercise = $questionnaire;
         return $this;
     }
 
@@ -72,6 +68,4 @@ class Question
     {
         return $this->getStatement() ?? "";
     }
-
-
 }
