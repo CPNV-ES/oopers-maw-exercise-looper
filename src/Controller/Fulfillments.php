@@ -7,6 +7,8 @@ use App\Entity\Exercise;
 use App\Entity\Filling;
 use App\Entity\Question;
 use App\Form\FillingForm;
+use Cassandra\Date;
+use DateTime;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
 use MVC\Http\HTTPStatus;
@@ -14,20 +16,21 @@ use MVC\Http\Response\Response;
 use MVC\Http\Routing\Annotation\Route;
 use ORM\SQLOperations;
 
-#[Route("/exercises/[:exerciseId]/fulfillments", name:"exercises.fulfillments.")]
+#[Route("/exercises/[:e_id]/fulfillments", name:"exercises.fulfillments.")]
 class Fulfillments extends Controller
 {
 
     #[Route("/new", name: 'new', methods: [HTTPMethod::GET, HTTPMethod::POST])]
-    public function new(int $exerciseId, SQLOperations $operations): Response
+    public function new(int $e_id, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $exerciseId]);
+        $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $e_id]);
         $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $exercise->getId()]);
         $filling = (new Filling())
             ->setExercise($exercise)
             ->setAnswers(array_map(function ($question) {
                 return (new Answer())->setQuestion($question);
-            }, $questions));
+            }, $questions))
+            ->setSubmissionDate(new DateTime());
 
         $form = new FillingForm($filling);
         $form->handleRequest($this->request);
@@ -39,7 +42,7 @@ class Fulfillments extends Controller
                 $answer->setFilling($filling);
                 $operations->create($answer);
             }
-            return $this->redirectToRoute('exercises.fulfillments.edit', ['exerciseId' => $exercise->getId(), 'fulfillmentId' => $filling->getId()], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('exercises.fulfillments.edit', ['e_id' => $exercise->getId(), 'fulfillmentId' => $filling->getId()], HTTPStatus::HTTP_SEE_OTHER);
         }
 
         return $this->render('exercises.filling.new', [
@@ -49,26 +52,26 @@ class Fulfillments extends Controller
     }
 
     #[Route("/", name: 'create', methods: [HTTPMethod::POST])]
-    public function addFulfillment(int $exerciseId): Response
+    public function addFulfillment(int $e_id): Response
     {
         $fulfillmentId = 0;
-        return $this->redirectToRoute("exercises.fulfillments.edit",["exerciceId"=>$exerciseId,"fulfillmentId"=>$fulfillmentId]);
+        return $this->redirectToRoute("exercises.fulfillments.edit",["e_id"=>$e_id,"fulfillmentId"=>$fulfillmentId]);
     }
 
     #[Route("/[:fulfillmentId]/edit", name: 'edit')]
-    public function showEditFulfillment(int $exerciseId, int $fulfillmentId): Response
+    public function showEditFulfillment(int $e_id, int $fulfillmentId): Response
     {
-        return $this->render('exercises.filling.edit',["exerciceId"=>$exerciseId,"fulfillmentId"=>$fulfillmentId]);
+        return $this->render('exercises.filling.edit',["exerciceId"=>$e_id,"fulfillmentId"=>$fulfillmentId]);
     }
 
     #[Route("/[:fulfillmentId]", name: 'update', methods: [HTTPMethod::PATCH])]
-    public function editFulfillment(int $exerciceId, int $fulfillmentId): Response
+    public function editFulfillment(int $e_id, int $fulfillmentId): Response
     {
-        return $this->redirectToRoute("exercises.fulfillments.edit",["exerciceId"=>1,"fulfillmentId"=>1]);
+        return $this->redirectToRoute("exercises.fulfillments.edit",["e_id"=>1,"fulfillmentId"=>1]);
     }
 
     #[Route("/[:fulfillmentId]", name: 'show')]
-    public function showFulfillment(int $exerciceId, int $fulfillmentId): Response
+    public function showFulfillment(int $e_id, int $fulfillmentId): Response
     {
         return $this->render('exercises.management.results-by-fulfillment');
     }

@@ -18,7 +18,7 @@ class Filling
     #[Column("submission_date")]
     private DateTime $submissionDate;
 
-    //private array $answers = [];
+    private array $answers = [];
 
     public function getId(): int
     {
@@ -53,7 +53,7 @@ class Filling
         return $this;
     }
 
-    /*public function getAnswers(): array
+    public function getAnswers(): array
     {
         return $this->answers;
     }
@@ -68,5 +68,5 @@ class Filling
     {
         $this->answers[] = $answer;
         return $this;
-    }*/
+    }
 }

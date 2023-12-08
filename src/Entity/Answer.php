@@ -11,7 +11,7 @@ class Answer
     #[Column("id")]
     private int $id;
     #[Column("content")]
-    private string $content;
+    private string $content = "";
     #[Column("fillings_id")]
     private Filling $filling;
     #[Column("questions_id")]
@@ -64,6 +64,10 @@ class Answer
     public function isMultiline(): bool
     {
         return in_array($this->question->getKind(), [QuestionKind::MultilineText,QuestionKind::ListOfSingleLines]);
+    }
+
+    public function getExercise(){
+        return $this->filling->getExercise();
     }
 
     public function getContentLenghtValidation(): ContentLenghtValidation
