@@ -16,7 +16,7 @@ use App\Entity\ContentLengthValidation; ?>
         <tbody>
             <?php foreach($this->fulfillments as $fulfillment): ?>
             <tr>
-                <td><a href="<?=$this->url("exercises.fulfillments.show",["e_id"=>$this->exerciceId,"fulfillmentId"=>$fulfillment->GetId()])?>"><?=$fulfillment->getSubmissionDate()->format("d.m.o G:s")?></a></td>
+                <td><a href="<?=$this->url("exercises.fulfillments.show",["e_id"=>$this->exerciceId,"fulfillmentId"=>$fulfillment->GetId()])?>"><?=$fulfillment->getSubmissionDate()->format("Y-m-d H:i")?></a></td>
                 <?php foreach($this->answers[$fulfillment->GetId()] as $answerForFulfillment): ?>
                     <?php switch ($answerForFulfillment->getContentLenghtValidation()):
                         case ContentLengthValidation::VERY_GOOD: ?>
