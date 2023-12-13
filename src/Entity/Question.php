@@ -13,7 +13,7 @@ class Question
     #[Column("statement")]
     private string $statement = "";
     #[Column("kind")]
-    private QuestionKind $kind = QuestionKind::SingleLineText;
+    private QuestionKind $kind = QuestionKind::SINGLE_LINE_TEXT;
     #[Column("questionnaires_id")]
     private Exercise $exercise;
 

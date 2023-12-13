@@ -4,7 +4,7 @@ namespace App\Entity;
 
 enum QuestionKind: string
 {
-    case SingleLineText = 'SingleLineText';
-    case ListOfSingleLines = 'ListOfSingleLines';
-    case MultilineText = 'MultilineText';
+    case SINGLE_LINE_TEXT = 'SingleLineText';
+    case LIST_OF_SINGLE_LINES = 'ListOfSingleLines';
+    case MULTILINE_TEXT = 'MultilineText';
 }

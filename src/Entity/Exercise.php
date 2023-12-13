@@ -13,7 +13,7 @@ class Exercise
     #[Column("title")]
     private string $title = "";
     #[Column("state")]
-    private ExerciseState $state = ExerciseState::Building;
+    private ExerciseState $state = ExerciseState::BUILDING;
 
     /**
      * Transform a given questionnaire list into a map of states with the list of questionnaires inside.
@@ -31,27 +31,27 @@ class Exercise
 
     public function canBeReadyForAnswers($questionCount) : bool
     {
-        return $questionCount > 0 &&  $this->state == ExerciseState::Building;
+        return $questionCount > 0 &&  $this->state == ExerciseState::BUILDING;
     }
 
     public function canManageFields(): bool
     {
-        return $this->state == ExerciseState::Building;
+        return $this->state == ExerciseState::BUILDING;
     }
 
     public function canDeleteFields(): bool
     {
-        return $this->state != ExerciseState::Answering;
+        return $this->state != ExerciseState::ANSWERING;
     }
 
     public function canClose(): bool
     {
-        return $this->state == ExerciseState::Answering;
+        return $this->state == ExerciseState::ANSWERING;
     }
 
     public function canShowResults(): bool
     {
-        return $this->state != ExerciseState::Building;
+        return $this->state != ExerciseState::BUILDING;
     }
 
     public function getId(): int

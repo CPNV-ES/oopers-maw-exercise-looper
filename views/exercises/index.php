@@ -42,7 +42,7 @@
 
                                 <?php if($questionnaire->canClose()) : ?>
                                 <a title="Close" rel="nofollow" data-method="put"
-                                   href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\ExerciseState::Closed->value?>"><i class="fa fa-minus-circle"></i></a>
+                                   href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\ExerciseState::CLOSED->value?>"><i class="fa fa-minus-circle"></i></a>
                                 <?php endif; ?>
                             </td>
                         </tr>

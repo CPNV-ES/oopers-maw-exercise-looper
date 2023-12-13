@@ -42,7 +42,7 @@ class Exercises extends Controller
     #[Route("/answering", name: 'answering')]
     public function answering(SQLOperations $operations): Response
     {
-        $questionnaires = $operations->fetchAll(Exercise::class,["state"=>ExerciseState::Answering->value]);
+        $questionnaires = $operations->fetchAll(Exercise::class,["state"=>ExerciseState::ANSWERING->value]);
         return $this->render('exercises.filling.list',["questionnaires"=>$questionnaires]);
     }
 

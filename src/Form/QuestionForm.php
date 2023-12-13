@@ -40,9 +40,9 @@ class QuestionForm extends AbstractForm
     private function getChoices(): array
     {
         return [
-            new ChoiceOption(QuestionKind::SingleLineText->value, 'Single line text'),
-            new ChoiceOption(QuestionKind::ListOfSingleLines->value, 'List of single lines'),
-            new ChoiceOption(QuestionKind::MultilineText->value, 'Multi-line text'),
+            new ChoiceOption(QuestionKind::SINGLE_LINE_TEXT->value, 'Single line text'),
+            new ChoiceOption(QuestionKind::LIST_OF_SINGLE_LINES->value, 'List of single lines'),
+            new ChoiceOption(QuestionKind::MULTILINE_TEXT->value, 'Multi-line text'),
         ];
     }
 }

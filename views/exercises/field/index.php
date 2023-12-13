@@ -29,7 +29,7 @@
             </table>
 
             <a data-confirm="Are you sure? You won't be able to further edit this exercise" class="button"
-               rel="nofollow" data-method="put" href="<?= $this->url("exercises.update", ["id" => $this->exercise->getId()])."?state=". \App\Entity\ExerciseState::Answering->value ?>"><i
+               rel="nofollow" data-method="put" href="<?= $this->url("exercises.update", ["id" => $this->exercise->getId()])."?state=". \App\Entity\ExerciseState::ANSWERING->value ?>"><i
                         class="fa fa-comment"></i> Complete and be ready for answers</a>
 
         </section>
