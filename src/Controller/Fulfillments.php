@@ -50,23 +50,27 @@ class Fulfillments extends Controller
         ]);
     }
 
-    #[Route("/", name: 'create', methods: [HTTPMethod::POST])]
-    public function addFulfillment(int $e_id): Response
+    #[Route("/[:fulfillmentId]/edit", name: 'edit', methods: [HTTPMethod::GET, HTTPMethod::POST])]
+    public function edit(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
-        $fulfillmentId = 0;
-        return $this->redirectToRoute("exercises.fulfillments.edit",["e_id"=>$e_id,"fulfillmentId"=>$fulfillmentId]);
-    }
+        $filling = $operations->fetchOneOrThrow(Filling::class, ['id' => $fulfillmentId]);
+        $filling->setAnswers($operations->fetchAll(Answer::class, ['fillings_id' => $fulfillmentId]));
 
-    #[Route("/[:fulfillmentId]/edit", name: 'edit')]
-    public function showEditFulfillment(int $e_id, int $fulfillmentId): Response
-    {
-        return $this->render('exercises.filling.edit',["exerciceId"=>$e_id,"fulfillmentId"=>$fulfillmentId]);
-    }
+        $form = new FillingForm($filling);
+        $form->handleRequest($this->request);
 
-    #[Route("/[:fulfillmentId]", name: 'update', methods: [HTTPMethod::PATCH])]
-    public function editFulfillment(int $e_id, int $fulfillmentId): Response
-    {
-        return $this->redirectToRoute("exercises.fulfillments.edit",["e_id"=>1,"fulfillmentId"=>1]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $operations->update($filling);
+            foreach ($filling->getAnswers() as $answer) {
+                $answer->setFilling($filling);
+                $operations->update($answer);
+            }
+            return $this->redirectToRoute('exercises.fulfillments.edit', ['e_id' => $e_id, 'fulfillmentId' => $fulfillmentId], HTTPStatus::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('exercises.filling.edit', [
+            'form' => $form->renderView()
+        ]);
     }
 
     #[Route("/[:fulfillmentId]", name: 'show')]
