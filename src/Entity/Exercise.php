@@ -2,20 +2,57 @@
 
 namespace App\Entity;
 
-use ORM as ORM;
+use ORM\Column;
+use ORM\Table;
 
-#[ORM\Table('questionnaires')]
+#[Table("questionnaires")]
 class Exercise
 {
-
-    #[ORM\Column('id')]
+    #[Column("id")]
     private int $id;
+    #[Column("title")]
+    private string $title = "";
+    #[Column("state")]
+    private ExerciseState $state = ExerciseState::BUILDING;
 
-    #[ORM\Column('state')]
-    private string $state = "Building";
+    /**
+     * Transform a given questionnaire list into a map of states with the list of questionnaires inside.
+     * @param array $questionnaires - A given questionnaire list to arrange
+     * @return array - The arranged map (key = one QuestionnaireState, value = list of questionnaires in this state)
+     */
+    public static function arrangeQuestionnairesByCategoryMap(array $questionnaires) : array
+    {
+        $categoryQuestionnairesMap = [];
+        foreach ($questionnaires as $questionnaire){
+            $categoryQuestionnairesMap[$questionnaire->getState()->value][] = $questionnaire;
+        }
+        return $categoryQuestionnairesMap;
+    }
 
-    #[ORM\Column('title')]
-    private ?string $title = null;
+    public function canBeReadyForAnswers($questionCount) : bool
+    {
+        return $questionCount > 0 &&  $this->state == ExerciseState::BUILDING;
+    }
+
+    public function canManageFields(): bool
+    {
+        return $this->state == ExerciseState::BUILDING;
+    }
+
+    public function canDeleteFields(): bool
+    {
+        return $this->state != ExerciseState::ANSWERING;
+    }
+
+    public function canClose(): bool
+    {
+        return $this->state == ExerciseState::ANSWERING;
+    }
+
+    public function canShowResults(): bool
+    {
+        return $this->state != ExerciseState::BUILDING;
+    }
 
     public function getId(): int
     {
@@ -28,18 +65,7 @@ class Exercise
         return $this;
     }
 
-    public function getState(): string
-    {
-        return $this->state;
-    }
-
-    public function setState(string $state): Exercise
-    {
-        $this->state = $state;
-        return $this;
-    }
-
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -50,4 +76,14 @@ class Exercise
         return $this;
     }
 
+    public function getState(): ExerciseState
+    {
+        return $this->state;
+    }
+
+    public function setState(ExerciseState $state): Exercise
+    {
+        $this->state = $state;
+        return $this;
+    }
 }

@@ -1,7 +1,7 @@
-<?=$this->include("partial.topbar",["title"=>"Results.php by question","type"=>"results"])?>
+<?=$this->include("partial.topbar",["title"=>"Results by question","type"=>"results"])?>
 
 <main class="container">
-    <h1>Quels sont les trois piliers (principes) de scrum ?</h1>
+    <h1><?=$this->question->GetStatement()?></h1>
     <table>
         <thead>
         <tr>
@@ -11,18 +11,11 @@
         </thead>
 
         <tbody>
+        <?php foreach($this->answers as $answer): ?>
         <tr>
-            <td><a href="<?=$this->url("exercises.fulfillments.show",["exerciceId"=>1,"fulfillmentId"=>4])?>">2020-10-26 12:53:43 UTC</a></td>
-            <td>Transparence, Adaptation et Recherche</td>
+            <td><a href="<?=$this->url("exercises.fulfillments.show",["e_id"=>$this->question->getExercise()->getId(),"fulfillmentId"=>$answer->getFilling()->getId()])?>"><?=$answer->getFilling()->getSubmissionDate()->format("Y-m-d H:i")?></a></td>
+            <td><?=$answer->getContent()?></td>
         </tr>
-        <tr>
-            <td><a href="/exercises/1/fulfillments/4">2020-10-26 12:55:22 UTC</a></td>
-            <td>transparence</td>
-        </tr>
-        <tr>
-            <td><a href="/exercises/1/fulfillments/7">2020-10-26 12:56:13 UTC</a></td>
-            <td>La transparence, L'agilité,</td>
-        </tr>
-        </tbody>
+        <?php endforeach; ?>
     </table>
 </main>

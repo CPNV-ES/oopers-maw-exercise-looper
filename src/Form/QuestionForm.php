@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Question;
+use App\Entity\QuestionKind;
 use MVC\Form\AbstractForm;
 use MVC\Form\Field\ChoiceField;
 use MVC\Form\Field\ChoiceOption;
@@ -39,9 +40,9 @@ class QuestionForm extends AbstractForm
     private function getChoices(): array
     {
         return [
-            new ChoiceOption(Question::SINGLE_LINE_TYPE, 'Single line text'),
-            new ChoiceOption(Question::MULTI_SINGLE_LINE_TYPE, 'List of single lines'),
-            new ChoiceOption(Question::MULTILINE_TYPE, 'Multi-line text'),
+            new ChoiceOption(QuestionKind::SINGLE_LINE_TEXT->value, 'Single line text'),
+            new ChoiceOption(QuestionKind::LIST_OF_SINGLE_LINES->value, 'List of single lines'),
+            new ChoiceOption(QuestionKind::MULTILINE_TEXT->value, 'Multi-line text'),
         ];
     }
 }

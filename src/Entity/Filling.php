@@ -2,30 +2,23 @@
 
 namespace App\Entity;
 
-use ORM as ORM;
+use DateTime;
+use ORM\Column;
+use ORM\Table;
 
-#[ORM\Table('fillings')]
+#[Table('fillings')]
 class Filling
 {
-
-    #[ORM\Column('id')]
+    #[Column('id')]
     private int $id;
 
-    #[ORM\Column('questionnaires_id')]
-    private int|Exercise $exercise;
+    #[Column('questionnaires_id')]
+    private Exercise $exercise;
 
-    /**
-     * @var Answer[]
-     */
+    #[Column("submission_date")]
+    private DateTime $submissionDate;
+
     private array $answers = [];
-
-    #[ORM\Column('submission_date')]
-    private string $submission_date;
-
-    public function __construct()
-    {
-        $this->setSubmissionDate((new \DateTimeImmutable())->format('c'));
-    }
 
     public function getId(): int
     {
@@ -38,25 +31,25 @@ class Filling
         return $this;
     }
 
-    public function getExercise(): Exercise|int
+    public function getExercise(): Exercise
     {
         return $this->exercise;
     }
 
-    public function setExercise(Exercise|int $exercise): Filling
+    public function setExercise(Exercise $exercise): Filling
     {
         $this->exercise = $exercise;
         return $this;
     }
 
-    public function getSubmissionDate(): string
+    public function getSubmissionDate(): DateTime
     {
-        return $this->submission_date;
+        return $this->submissionDate;
     }
 
-    public function setSubmissionDate(string $submission_date): Filling
+    public function setSubmissionDate(DateTime $submissionDate): Filling
     {
-        $this->submission_date = $submission_date;
+        $this->submissionDate = $submissionDate;
         return $this;
     }
 
@@ -76,6 +69,4 @@ class Filling
         $this->answers[] = $answer;
         return $this;
     }
-
-
 }

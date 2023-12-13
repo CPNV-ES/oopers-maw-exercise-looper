@@ -17,7 +17,7 @@
                 <?php foreach ($this->questions as $question): ?>
                     <tr>
                         <td><?= $question->getStatement() ?></td>
-                        <td><?= $question->getKind() ?></td>
+                        <td><?= $question->getKind()->value ?></td>
                         <td>
                             <a title="Edit" href="<?= $this->url("exercises.fields.edit", ["e_id" => $this->exercise->getId(), "fieldId" => $question->getId()])?>"><i class="fa fa-edit"></i></a>
                             <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
@@ -29,7 +29,7 @@
             </table>
 
             <a data-confirm="Are you sure? You won't be able to further edit this exercise" class="button"
-               rel="nofollow" data-method="put" href="<?= $this->url("exercises.update", ["id" => $this->exercise->getId()]) ?>?exercise%5Bstatus%5D=answering"><i
+               rel="nofollow" data-method="put" href="<?= $this->url("exercises.update", ["id" => $this->exercise->getId()])."?state=". \App\Entity\ExerciseState::ANSWERING->value ?>"><i
                         class="fa fa-comment"></i> Complete and be ready for answers</a>
 
         </section>

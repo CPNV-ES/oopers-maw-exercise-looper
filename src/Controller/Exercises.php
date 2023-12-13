@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
 use App\Entity\Exercise;
+use App\Entity\ExerciseState;
 use App\Form\ExerciseForm;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
@@ -24,8 +26,13 @@ class Exercises extends Controller
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $id = $operations->create($exercise);
-            return $this->redirectToRoute('exercises.fields.show', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
+            try {
+                $id = $operations->create($exercise);
+                return $this->redirectToRoute('exercises.fields.index', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
+            }catch (\Exception $e){
+                dd($e);
+                //Todo : Display custom error message in form view
+            }
         }
 
         return $this->render('exercises/new', ['form' => $form->renderView()]);
@@ -33,31 +40,43 @@ class Exercises extends Controller
 
     /*-- ANSWERING / FULFILLMENT --*/
     #[Route("/answering", name: 'answering')]
-    public function answering(): Response
+    public function answering(SQLOperations $operations): Response
     {
-        return $this->render('exercises.answering.list');
+        $questionnaires = $operations->fetchAll(Exercise::class,["state"=>ExerciseState::ANSWERING->value]);
+        return $this->render('exercises.filling.list',["questionnaires"=>$questionnaires]);
     }
 
     /*-- MANAGEMENT / RESULTS --*/
     #[Route("", name: 'index')]
     public function index(SQLOperations $operations): Response
     {
-        return $this->render('exercises/index', [
-            'building' => $operations->fetchAll(Exercise::class, ['state' => 'Building']),
-            'answering' => $operations->fetchAll(Exercise::class, ['state' => 'Answering']),
-            'closed' => $operations->fetchAll(Exercise::class, ['state' => 'Closed']),
-        ]);
+        $questionnaires = $operations->fetchAll(Exercise::class);
+        $questionnairesStateMap = Exercise::arrangeQuestionnairesByCategoryMap($questionnaires);
+        $questions = $operations->fetchAll(Answer::class);
+        //TODO : REMOVED THIS HACK OMG
+        $questionCountByQuestionnaires = [];
+        foreach ($questions as $question){
+            if(!isset($questionCountByQuestionnaires[$question->getExercise()->getId()]))
+                $questionCountByQuestionnaires[$question->getExercise()->getId()] = 0;
+            $questionCountByQuestionnaires[$question->getExercise()->getId()]++;
+        }
+        return $this->render('exercises.index',["questionnairesStateMap"=>$questionnairesStateMap,"questionCountByQuestionnaires"=>$questionCountByQuestionnaires]);
     }
 
     #[Route("/[:id]", name: 'update', methods: [HTTPMethod::PUT])]
-    public function changExerciceInfo(int $exerciceId): Response
+    public function changExerciceInfo(int $id, SQLOperations $operations): Response
     {
-        return $this->redirectToRoute("exercises.show");
+        $exercise = $operations->fetchOne(Exercise::class,["id"=>$id]);
+        if($this->request->query->get("state") !== null)
+            $exercise->setState(ExerciseState::from($this->request->query->get("state")));
+        $operations->update($exercise);
+        return $this->redirectToRoute("exercises.index");
     }
 
     #[Route("/[:id]", name: 'delete', methods: [HTTPMethod::DELETE])]
-    public function deleteExercise(int $exerciceId): Response
+    public function deleteExercise(int $id, SQLOperations $operations): Response
     {
-        return $this->redirectToRoute("exercises.show");
+        $operations->delete(Exercise::class,$id);
+        return $this->redirectToRoute("exercises.index");
     }
 }
