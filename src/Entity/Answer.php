@@ -68,7 +68,21 @@ class Answer
 
     public function isMultiline(): bool
     {
-        return in_array($this->question->getKind(), [Question::MULTI_SINGLE_LINE_TYPE, Question::MULTILINE_TYPE]);
+        return in_array($this->question->getKind(), [QuestionKind::MULTILINE_TEXT,QuestionKind::LIST_OF_SINGLE_LINES]);
     }
 
+    public function getExercise(){
+        return $this->filling->getExercise();
+    }
+
+    public function getContentLenghtValidation(): ContentLengthValidation
+    {
+        if (mb_strlen($this->content) >= 10) {
+            return ContentLengthValidation::VERY_GOOD;
+        }
+        if (mb_strlen($this->content) > 0) {
+            return ContentLengthValidation::SUFFICIENT;
+        }
+        return ContentLengthValidation::NOT_GOOD_ENOUGH;
+    }
 }
