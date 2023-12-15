@@ -66,7 +66,7 @@ class Exercises extends Controller
     #[Route("/[:id]", name: 'update', methods: [HTTPMethod::PUT])]
     public function changExerciceInfo(int $id, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOne(Exercise::class,["id"=>$id]);
+        $exercise = $operations->fetchOneOrThrow(Exercise::class,["id"=>$id]);
         if($this->request->query->get("state") !== null)
             $exercise->setState(ExerciseState::from($this->request->query->get("state")));
         $operations->update($exercise);
