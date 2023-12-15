@@ -31,6 +31,10 @@ class FillingForm extends AbstractForm
                     if ($answer->isMultiline()) return TextAreaField::class;
                     return TextField::class;
                 },
+                'constraint'=> function(string $value){
+                    if(strlen($value) > 1023) return ["message"=>"The answer field is too long! It must be less or equals to 1023 characters."];
+                    return [];
+                },
                 'attributes' => [
                     'class' => ['field']
                 ]

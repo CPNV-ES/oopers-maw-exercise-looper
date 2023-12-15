@@ -24,6 +24,10 @@ class QuestionForm extends AbstractForm
         $this
             ->add('statement', TextField::class, [
                 'label' => 'Label',
+                'constraint'=> function(string $value){
+                    if(strlen($value) > 511) return ["message"=>"The statement field is too long! It must be less or equals to 511 characters."];
+                    return [];
+                },
                 'attributes' => [
                     'class' => ['field']
                 ]
