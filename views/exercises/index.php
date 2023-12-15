@@ -19,7 +19,7 @@
                             <td><?= $questionnaire->GetTitle() ?></td>
                             <td>
                                 <?php if($questionnaire->canBeReadyForAnswers($this->questionCountByQuestionnaires[$questionnaire->GetId()]??0)) : ?>
-                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\QuestionnaireState::Answering->value?>">
+                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\ExerciseState::ANSWERING->value?>">
                                     <i class="fa fa-comment"></i>
                                 </a>
                                 <?php endif; ?>
