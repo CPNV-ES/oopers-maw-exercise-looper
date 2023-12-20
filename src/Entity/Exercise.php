@@ -2,12 +2,24 @@
 
 namespace App\Entity;
 
+use App\EntitiesTraits\Create;
+use App\EntitiesTraits\Delete;
+use App\EntitiesTraits\GetAll;
+use App\EntitiesTraits\GetOne;
+use App\EntitiesTraits\Update;
 use ORM\Column;
+use ORM\DatabaseOperations;
 use ORM\Table;
 
 #[Table("questionnaires")]
 class Exercise
 {
+    use Create;
+    use Delete;
+    use GetAll;
+    use GetOne;
+    use Update;
+
     #[Column("id")]
     private int $id;
     #[Column("title")]
@@ -16,17 +28,26 @@ class Exercise
     private ExerciseState $state = ExerciseState::BUILDING;
 
     /**
-     * Transform a given exercise list into a map of states with the list of exercises inside.
-     * @param array $exercises - A given exercise list to arrange
-     * @return array - The arranged map (key = one exercisestate, value = list of exercises in this state)
+     * Get all exercises in the Database in the desired state
+     * @param DatabaseOperations $operations - The db operations executor that will be used
+     * @return array - All the exercises with the given state
      */
-    public static function arrangeExercisesByCategoryMap(array $exercises) : array
+    public static function getAllWithDesiredState(DatabaseOperations $operations, ExerciseState $state) : array
     {
-        $categoryExercisesMap = [];
-        foreach ($exercises as $exercise){
-            $categoryExercisesMap[$exercise->getState()->value][] = $exercise;
+        return self::getAll($operations,["state"=>$state->value]);
+    }
+
+    /**
+     * Get all exercises and put them into a map of states with the list of exercises inside.
+     * @return array - The arranged map (key = one exercise state, value = list of exercises in this state)
+     */
+    public static function getAllArrangedByState(DatabaseOperations $operations) : array
+    {
+        $stateExercisesMap = [];
+        foreach (self::getAll($operations) as $exercise){
+            $stateExercisesMap[$exercise->getState()->value][] = $exercise;
         }
-        return $categoryExercisesMap;
+        return $stateExercisesMap;
     }
 
     public function canBeReadyForAnswers($questionCount) : bool

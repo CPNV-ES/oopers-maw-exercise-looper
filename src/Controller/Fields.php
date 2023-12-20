@@ -19,7 +19,7 @@ class Fields extends Controller
     #[Route("", name: "index", methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function index(int $e_id, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $e_id]);
+        $exercise = Exercise::getOneByID($operations,$e_id);
         $question = (new Question())->setExercise($exercise);
         $form = new QuestionForm($question);
         $form->handleRequest($this->request);
@@ -41,7 +41,7 @@ class Fields extends Controller
     #[Route("/[:fieldId]/edit", name: 'edit', methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function edit(int $e_id, int $fieldId, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $e_id]);
+        $exercise = Exercise::getOneByID($operations,$e_id);
         $question = $operations->fetchOneOrThrow(Question::class, ['id' => $fieldId]);
         $form = new QuestionForm($question);
         $form->handleRequest($this->request);
