@@ -2,12 +2,19 @@
 
 namespace App\Entity;
 
+use App\EntitiesTraits\Create;
+use App\EntitiesTraits\GetAll;
+use App\EntitiesTraits\Update;
 use ORM\Column;
 use ORM\Table;
 
 #[Table('answers')]
 class Answer
 {
+    use GetAll;
+    use Create;
+    use Update;
+
     #[Column("id")]
     private int $id;
     #[Column("content")]

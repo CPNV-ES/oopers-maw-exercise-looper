@@ -45,7 +45,7 @@ class Exercises extends Controller
     public function index(SQLOperations $operations): Response
     {
         $exercisesStateMap = Exercise::getAllArrangedByState($operations);
-        $questions = $operations->fetchAll(Answer::class);
+        $questions = Answer::getAll($operations);
         //TODO : REMOVED THIS HACK OMG
         $questionCountByExercises = [];
         foreach ($questions as $question){

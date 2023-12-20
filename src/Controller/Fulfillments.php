@@ -39,7 +39,7 @@ class Fulfillments extends Controller
             $filling->setId($id);
             foreach ($filling->getAnswers() as $answer) {
                 $answer->setFilling($filling);
-                $operations->create($answer);
+                $answer->create($operations);
             }
             return $this->redirectToRoute('exercises.fulfillments.edit', ['e_id' => $exercise->getId(), 'fulfillmentId' => $filling->getId()], HTTPStatus::HTTP_SEE_OTHER);
         }
@@ -54,7 +54,7 @@ class Fulfillments extends Controller
     public function edit(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
         $filling = $operations->fetchOneOrThrow(Filling::class, ['id' => $fulfillmentId]);
-        $filling->setAnswers($operations->fetchAll(Answer::class, ['fillings_id' => $fulfillmentId]));
+        $filling->setAnswers(Answer::getAll($operations,["fillings_id"=>$fulfillmentId]));
 
         $form = new FillingForm($filling);
         $form->handleRequest($this->request);
@@ -63,7 +63,7 @@ class Fulfillments extends Controller
             $operations->update($filling);
             foreach ($filling->getAnswers() as $answer) {
                 $answer->setFilling($filling);
-                $operations->update($answer);
+                $answer->update($operations);
             }
             return $this->redirectToRoute('exercises.fulfillments.edit', ['e_id' => $e_id, 'fulfillmentId' => $fulfillmentId], HTTPStatus::HTTP_SEE_OTHER);
         }
@@ -77,7 +77,7 @@ class Fulfillments extends Controller
     public function showFulfillment(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
         $filling = $operations->fetchOne(Filling::class,["id"=>$fulfillmentId]);
-        $filling->setAnswers($operations->fetchAll(Answer::class,["fillings_id"=>$fulfillmentId]));
+        $filling->setAnswers(Answer::getAll($operations,["fillings_id"=>$fulfillmentId]));
         return $this->render('exercises.management.results-by-fulfillment',['filling'=>$filling]);
     }
 }

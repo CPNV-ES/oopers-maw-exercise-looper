@@ -21,7 +21,7 @@ class Results extends Controller
         $fulfillments = $operations->fetchAll(Filling::class,["questionnaires_id"=>$e_id]);
         $answers = [];
         foreach ($fulfillments as $fulfillment){
-            $answers[$fulfillment->getId()] = $operations->fetchAll(Answer::class,["fillings_id"=>$fulfillment->getId()]);
+            $answers[$fulfillment->getId()] = Answer::getAll($operations,["fillings_id"=>$fulfillment->getId()]);
         }
         return $this->render('exercises.management.results',["exerciseId"=>$e_id,"questions"=>$questions,"fulfillments"=>$fulfillments,"answers"=>$answers]);
     }
@@ -30,7 +30,7 @@ class Results extends Controller
     public function showExerciseResult(int $e_id, int $resultId, SQLOperations $operations): Response
     {
         $question = $operations->fetchOneOrThrow(Question::class,["id"=>$resultId]);
-        $answers = $operations->fetchAll(Answer::class,["questions_id"=>$question->GetId()]);
+        $answers = Answer::getAll($operations,["questions_id"=>$question->GetId()]);
         return $this->render('exercises.management.results-by-question',["question"=>$question,"answers"=>$answers]);
     }
 }
