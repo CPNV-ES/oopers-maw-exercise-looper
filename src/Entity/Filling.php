@@ -2,13 +2,24 @@
 
 namespace App\Entity;
 
+use App\EntitiesTraits\Create;
+use App\EntitiesTraits\GetAll;
+use App\EntitiesTraits\GetAllFromExercise;
+use App\EntitiesTraits\GetOne;
+use App\EntitiesTraits\Update;
 use DateTime;
 use ORM\Column;
+use ORM\DatabaseOperations;
 use ORM\Table;
 
 #[Table('fillings')]
 class Filling
 {
+    use Create;
+    use GetOne;
+    use GetAll;
+    use GetAllFromExercise;
+    use Update;
     #[Column('id')]
     private int $id;
 

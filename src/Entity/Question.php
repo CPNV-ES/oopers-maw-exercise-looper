@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\EntitiesTraits\Create;
 use App\EntitiesTraits\Delete;
 use App\EntitiesTraits\GetAll;
+use App\EntitiesTraits\GetAllFromExercise;
 use App\EntitiesTraits\GetOne;
 use App\EntitiesTraits\Update;
 use ORM\Column;
@@ -16,6 +17,7 @@ class Question
 {
     use Create;
     use GetAll;
+    use GetAllFromExercise;
     use GetOne;
     use Update;
     use Delete;
@@ -28,11 +30,6 @@ class Question
     private QuestionKind $kind = QuestionKind::SINGLE_LINE_TEXT;
     #[Column("questionnaires_id")]
     private Exercise $exercise;
-
-    public static function getAllFromExercise(DatabaseOperations $operations, int $exerciseId) : array
-    {
-        return self::getAll($operations, ['questionnaires_id' => $exerciseId]);
-    }
 
     public function getId(): int
     {

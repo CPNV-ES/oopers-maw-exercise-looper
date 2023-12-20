@@ -35,8 +35,7 @@ class Fulfillments extends Controller
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $id = $operations->create($filling);
-            $filling->setId($id);
+            $filling->create($operations);
             foreach ($filling->getAnswers() as $answer) {
                 $answer->setFilling($filling);
                 $answer->create($operations);
@@ -53,14 +52,14 @@ class Fulfillments extends Controller
     #[Route("/[:fulfillmentId]/edit", name: 'edit', methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function edit(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
-        $filling = $operations->fetchOneOrThrow(Filling::class, ['id' => $fulfillmentId]);
+        $filling = Filling::getOneByID($operations,$fulfillmentId);
         $filling->setAnswers(Answer::getAll($operations,["fillings_id"=>$fulfillmentId]));
 
         $form = new FillingForm($filling);
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $operations->update($filling);
+            $filling->update($operations);
             foreach ($filling->getAnswers() as $answer) {
                 $answer->setFilling($filling);
                 $answer->update($operations);
@@ -76,7 +75,7 @@ class Fulfillments extends Controller
     #[Route("/[:fulfillmentId]", name: 'show')]
     public function showFulfillment(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
-        $filling = $operations->fetchOne(Filling::class,["id"=>$fulfillmentId]);
+        $filling = Filling::getOneByID($operations, $fulfillmentId);
         $filling->setAnswers(Answer::getAll($operations,["fillings_id"=>$fulfillmentId]));
         return $this->render('exercises.management.results-by-fulfillment',['filling'=>$filling]);
     }

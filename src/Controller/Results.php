@@ -18,7 +18,7 @@ class Results extends Controller
     public function showExerciseResults(int $e_id, SQLOperations $operations): Response
     {
         $questions = Question::getAllFromExercise($operations, $e_id);
-        $fulfillments = $operations->fetchAll(Filling::class,["questionnaires_id"=>$e_id]);
+        $fulfillments = Filling::getAllFromExercise($operations,$e_id);
         $answers = [];
         foreach ($fulfillments as $fulfillment){
             $answers[$fulfillment->getId()] = Answer::getAll($operations,["fillings_id"=>$fulfillment->getId()]);
