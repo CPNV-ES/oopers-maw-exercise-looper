@@ -53,7 +53,7 @@ class Fulfillments extends Controller
     public function edit(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
         $filling = Filling::getOneByID($operations,$fulfillmentId);
-        $filling->setAnswers(Answer::getAll($operations,["fillings_id"=>$fulfillmentId]));
+        $filling->setAnswers(Answer::getAllFromFilling($operations,$fulfillmentId));
 
         $form = new FillingForm($filling);
         $form->handleRequest($this->request);
@@ -76,7 +76,7 @@ class Fulfillments extends Controller
     public function showFulfillment(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
         $filling = Filling::getOneByID($operations, $fulfillmentId);
-        $filling->setAnswers(Answer::getAll($operations,["fillings_id"=>$fulfillmentId]));
+        $filling->setAnswers(Answer::getAllFromFilling($operations,$fulfillmentId));
         return $this->render('exercises.management.results-by-fulfillment',['filling'=>$filling]);
     }
 }
