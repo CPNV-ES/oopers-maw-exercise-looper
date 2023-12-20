@@ -17,7 +17,7 @@ class Results extends Controller
     #[Route("/", name: 'show')]
     public function showExerciseResults(int $e_id, SQLOperations $operations): Response
     {
-        $questions = $operations->fetchAll(Question::class,["questionnaires_id"=>$e_id]);
+        $questions = Question::getAllFromExercise($operations, $e_id);
         $fulfillments = $operations->fetchAll(Filling::class,["questionnaires_id"=>$e_id]);
         $answers = [];
         foreach ($fulfillments as $fulfillment){
@@ -29,7 +29,7 @@ class Results extends Controller
     #[Route("/[:resultId]", name: 'show-question')]
     public function showExerciseResult(int $e_id, int $resultId, SQLOperations $operations): Response
     {
-        $question = $operations->fetchOneOrThrow(Question::class,["id"=>$resultId]);
+        $question = Question::getOneByID($operations, $resultId);
         $answers = Answer::getAll($operations,["questions_id"=>$question->GetId()]);
         return $this->render('exercises.management.results-by-question',["question"=>$question,"answers"=>$answers]);
     }

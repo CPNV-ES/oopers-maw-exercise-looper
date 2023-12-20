@@ -23,7 +23,7 @@ class Fulfillments extends Controller
     public function new(int $e_id, SQLOperations $operations): Response
     {
         $exercise = Exercise::getOneByID($operations,$e_id);
-        $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $exercise->getId()]);
+        $questions = Question::getAllFromExercise($operations, $exercise->getId());
         $filling = (new Filling())
             ->setExercise($exercise)
             ->setAnswers(array_map(function ($question) {
