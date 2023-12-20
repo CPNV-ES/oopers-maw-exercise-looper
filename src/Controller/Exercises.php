@@ -42,25 +42,25 @@ class Exercises extends Controller
     #[Route("/answering", name: 'answering')]
     public function answering(SQLOperations $operations): Response
     {
-        $questionnaires = $operations->fetchAll(Exercise::class,["state"=>ExerciseState::ANSWERING->value]);
-        return $this->render('exercises.filling.list',["questionnaires"=>$questionnaires]);
+        $exercises = $operations->fetchAll(Exercise::class,["state"=>ExerciseState::ANSWERING->value]);
+        return $this->render('exercises.filling.list',["exercises"=>$exercises]);
     }
 
     /*-- MANAGEMENT / RESULTS --*/
     #[Route("", name: 'index')]
     public function index(SQLOperations $operations): Response
     {
-        $questionnaires = $operations->fetchAll(Exercise::class);
-        $questionnairesStateMap = Exercise::arrangeQuestionnairesByCategoryMap($questionnaires);
+        $exercises = $operations->fetchAll(Exercise::class);
+        $exercisesStateMap = Exercise::arrangeExercisesByCategoryMap($exercises);
         $questions = $operations->fetchAll(Answer::class);
         //TODO : REMOVED THIS HACK OMG
-        $questionCountByQuestionnaires = [];
+        $questionCountByExercises = [];
         foreach ($questions as $question){
-            if(!isset($questionCountByQuestionnaires[$question->getExercise()->getId()]))
-                $questionCountByQuestionnaires[$question->getExercise()->getId()] = 0;
-            $questionCountByQuestionnaires[$question->getExercise()->getId()]++;
+            if(!isset($questionCountByExercises[$question->getExercise()->getId()]))
+                $questionCountByExercises[$question->getExercise()->getId()] = 0;
+            $questionCountByExercises[$question->getExercise()->getId()]++;
         }
-        return $this->render('exercises.index',["questionnairesStateMap"=>$questionnairesStateMap,"questionCountByQuestionnaires"=>$questionCountByQuestionnaires]);
+        return $this->render('exercises.index',["exercisesStateMap"=>$exercisesStateMap,"questionCountByExercises"=>$questionCountByExercises]);
     }
 
     #[Route("/[:id]", name: 'update', methods: [HTTPMethod::PUT])]

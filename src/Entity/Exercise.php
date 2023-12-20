@@ -16,17 +16,17 @@ class Exercise
     private ExerciseState $state = ExerciseState::BUILDING;
 
     /**
-     * Transform a given questionnaire list into a map of states with the list of questionnaires inside.
-     * @param array $questionnaires - A given questionnaire list to arrange
-     * @return array - The arranged map (key = one QuestionnaireState, value = list of questionnaires in this state)
+     * Transform a given exercise list into a map of states with the list of exercises inside.
+     * @param array $exercises - A given exercise list to arrange
+     * @return array - The arranged map (key = one exercisestate, value = list of exercises in this state)
      */
-    public static function arrangeQuestionnairesByCategoryMap(array $questionnaires) : array
+    public static function arrangeExercisesByCategoryMap(array $exercises) : array
     {
-        $categoryQuestionnairesMap = [];
-        foreach ($questionnaires as $questionnaire){
-            $categoryQuestionnairesMap[$questionnaire->getState()->value][] = $questionnaire;
+        $categoryExercisesMap = [];
+        foreach ($exercises as $exercise){
+            $categoryExercisesMap[$exercise->getState()->value][] = $exercise;
         }
-        return $categoryQuestionnairesMap;
+        return $categoryExercisesMap;
     }
 
     public function canBeReadyForAnswers($questionCount) : bool

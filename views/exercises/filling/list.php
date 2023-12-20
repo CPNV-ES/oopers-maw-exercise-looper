@@ -2,10 +2,10 @@
 
 <main class="container">
     <div class="answering-list">
-        <?php foreach($this->questionnaires as $questionnaire): ?>
+        <?php foreach($this->exercises as $exercise): ?>
         <div class="column card">
-            <div class="title"><?=$questionnaire->getTitle()?></div>
-            <a class="button" href="<?=$this->url("exercises.fulfillments.new",["e_id"=>$questionnaire->getId()])?>">Take it</a>
+            <div class="title"><?=$exercise->getTitle()?></div>
+            <a class="button" href="<?=$this->url("exercises.fulfillments.new",["e_id"=>$exercise->getId()])?>">Take it</a>
         </div>
         <?php endforeach; ?>
     </div>

@@ -58,9 +58,9 @@ class Question
         return $this->exercise;
     }
 
-    public function setExercise(Exercise $questionnaire): Question
+    public function setExercise(Exercise $exercise): Question
     {
-        $this->exercise = $questionnaire;
+        $this->exercise = $exercise;
         return $this;
     }
 
