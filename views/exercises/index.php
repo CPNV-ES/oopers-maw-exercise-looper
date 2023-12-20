@@ -1,4 +1,4 @@
-<?= $this->include("partial.topbar", ["title" => "Managing exercices", "type" => "results"]) ?>
+<?= $this->include("partial.topbar", ["title" => "Managing exercises", "type" => "results"]) ?>
 
 <main class="container">
     <div class="row">

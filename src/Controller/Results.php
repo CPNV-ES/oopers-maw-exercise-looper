@@ -15,7 +15,7 @@ use ORM\SQLOperations;
 class Results extends Controller
 {
     #[Route("/", name: 'show')]
-    public function showExerciceResults(int $e_id, SQLOperations $operations): Response
+    public function showExerciseResults(int $e_id, SQLOperations $operations): Response
     {
         $questions = $operations->fetchAll(Question::class,["questionnaires_id"=>$e_id]);
         $fulfillments = $operations->fetchAll(Filling::class,["questionnaires_id"=>$e_id]);
@@ -23,11 +23,11 @@ class Results extends Controller
         foreach ($fulfillments as $fulfillment){
             $answers[$fulfillment->GetId()] = $operations->fetchAll(Answer::class,["fillings_id"=>$fulfillment->GetId()]);
         }
-        return $this->render('exercises.management.results',["exerciceId"=>$e_id,"questions"=>$questions,"fulfillments"=>$fulfillments,"answers"=>$answers]);
+        return $this->render('exercises.management.results',["exerciseId"=>$e_id,"questions"=>$questions,"fulfillments"=>$fulfillments,"answers"=>$answers]);
     }
 
     #[Route("/[:resultId]", name: 'show-question')]
-    public function showExerciceResult(int $e_id, int $resultId, SQLOperations $operations): Response
+    public function showExerciseResult(int $e_id, int $resultId, SQLOperations $operations): Response
     {
         $question = $operations->fetchOneOrThrow(Question::class,["id"=>$resultId]);
         $answers = $operations->fetchAll(Answer::class,["questions_id"=>$question->GetId()]);
