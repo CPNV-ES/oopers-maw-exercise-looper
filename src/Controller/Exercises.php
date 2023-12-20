@@ -26,13 +26,8 @@ class Exercises extends Controller
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $id = $operations->create($exercise);
-                return $this->redirectToRoute('exercises.fields.index', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
-            }catch (\Exception $e){
-                dd($e);
-                //Todo : Display custom error message in form view
-            }
+            $id = $operations->create($exercise);
+            return $this->redirectToRoute('exercises.fields.index', ['e_id' => $id], HTTPStatus::HTTP_SEE_OTHER);
         }
 
         return $this->render('exercises/new', ['form' => $form->renderView()]);
