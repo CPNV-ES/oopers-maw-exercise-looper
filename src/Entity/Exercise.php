@@ -59,7 +59,7 @@ class Exercise
     /**
      * @var Question[]
      */
-    #[ORM\HasMany(entity: Question::class, targetProperty: 'questionnaire')]
+    #[ORM\HasMany(entity: Question::class, targetProperty: 'exercise')]
     private array $questions = [];
 
     public function getId(): int
