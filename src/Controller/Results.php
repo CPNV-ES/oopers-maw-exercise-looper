@@ -21,7 +21,7 @@ class Results extends Controller
         $fulfillments = $operations->fetchAll(Filling::class,["questionnaires_id"=>$e_id]);
         $answers = [];
         foreach ($fulfillments as $fulfillment){
-            $answers[$fulfillment->GetId()] = $operations->fetchAll(Answer::class,["fillings_id"=>$fulfillment->GetId()]);
+            $answers[$fulfillment->getId()] = $operations->fetchAll(Answer::class,["fillings_id"=>$fulfillment->getId()]);
         }
         return $this->render('exercises.management.results',["exerciseId"=>$e_id,"questions"=>$questions,"fulfillments"=>$fulfillments,"answers"=>$answers]);
     }

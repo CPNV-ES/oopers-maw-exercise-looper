@@ -4,8 +4,8 @@
     <div class="answering-list">
         <?php foreach($this->questionnaires as $questionnaire): ?>
         <div class="column card">
-            <div class="title"><?=$questionnaire->GetTitle()?></div>
-            <a class="button" href="<?=$this->url("exercises.fulfillments.new",["e_id"=>$questionnaire->GetId()])?>">Take it</a>
+            <div class="title"><?=$questionnaire->getTitle()?></div>
+            <a class="button" href="<?=$this->url("exercises.fulfillments.new",["e_id"=>$questionnaire->getId()])?>">Take it</a>
         </div>
         <?php endforeach; ?>
     </div>

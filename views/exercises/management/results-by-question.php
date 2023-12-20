@@ -1,7 +1,7 @@
 <?=$this->include("partial.topbar",["title"=>"Results by question","type"=>"results"])?>
 
 <main class="container">
-    <h1><?=$this->question->GetStatement()?></h1>
+    <h1><?=$this->question->getStatement()?></h1>
     <table>
         <thead>
         <tr>

@@ -8,7 +8,7 @@ use App\Entity\ContentLengthValidation; ?>
         <tr>
             <th>Take</th>
             <?php foreach($this->questions as $question): ?>
-                <th><a href="<?=$this->url("exercises.results.show-question",["e_id"=>$this->exerciseId,"resultId"=>$question->GetId()])?>"><?=$question->getStatement()?></a></th>
+                <th><a href="<?=$this->url("exercises.results.show-question",["e_id"=>$this->exerciseId,"resultId"=>$question->getId()])?>"><?=$question->getStatement()?></a></th>
             <?php endforeach; ?>
         </tr>
         </thead>
@@ -16,8 +16,8 @@ use App\Entity\ContentLengthValidation; ?>
         <tbody>
             <?php foreach($this->fulfillments as $fulfillment): ?>
             <tr>
-                <td><a href="<?=$this->url("exercises.fulfillments.show",["e_id"=>$this->exerciseId,"fulfillmentId"=>$fulfillment->GetId()])?>"><?=$fulfillment->getSubmissionDate()->format("Y-m-d H:i")?></a></td>
-                <?php foreach($this->answers[$fulfillment->GetId()] as $answerForFulfillment): ?>
+                <td><a href="<?=$this->url("exercises.fulfillments.show",["e_id"=>$this->exerciseId,"fulfillmentId"=>$fulfillment->getId()])?>"><?=$fulfillment->getSubmissionDate()->format("Y-m-d H:i")?></a></td>
+                <?php foreach($this->answers[$fulfillment->getId()] as $answerForFulfillment): ?>
                     <?php switch ($answerForFulfillment->getContentLenghtValidation()):
                         case ContentLengthValidation::VERY_GOOD: ?>
                             <td class="answer"><i class="fa fa-check-double filled"></i></td>

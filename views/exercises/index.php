@@ -16,33 +16,33 @@
                     <tbody>
                     <?php foreach ($questionnaires as $questionnaire): ?>
                         <tr>
-                            <td><?= $questionnaire->GetTitle() ?></td>
+                            <td><?= $questionnaire->getTitle() ?></td>
                             <td>
-                                <?php if($questionnaire->canBeReadyForAnswers($this->questionCountByQuestionnaires[$questionnaire->GetId()]??0)) : ?>
-                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\QuestionnaireState::Answering->value?>">
+                                <?php if($questionnaire->canBeReadyForAnswers($this->questionCountByQuestionnaires[$questionnaire->getId()]??0)) : ?>
+                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="<?=$this->url("exercises.update",["id"=>$questionnaire->getId()])."?state=". \App\Entity\QuestionnaireState::Answering->value?>">
                                     <i class="fa fa-comment"></i>
                                 </a>
                                 <?php endif; ?>
 
                                 <?php if($questionnaire->canManageFields()) : ?>
                                 <a title="Manage fields"
-                                   href="<?= $this->url("exercises.fields.index", ["e_id" => $questionnaire->GetId()]) ?>"><i
+                                   href="<?= $this->url("exercises.fields.index", ["e_id" => $questionnaire->getId()]) ?>"><i
                                             class="fa fa-edit"></i></a>
                                 <?php endif; ?>
 
                                 <?php if($questionnaire->canDeleteFields()) : ?>
                                 <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete"
-                                   href="<?= $this->url("exercises.delete", ["id" => $questionnaire->GetId()]) ?>"><i
+                                   href="<?= $this->url("exercises.delete", ["id" => $questionnaire->getId()]) ?>"><i
                                             class="fa fa-trash"></i></a>
                                 <?php endif; ?>
 
                                 <?php if($questionnaire->canShowResults()) : ?>
-                                <a title="Show results" href="<?=$this->url("exercises.results.show",["e_id"=>$questionnaire->GetId()])?>"><i class="fa fa-chart-bar"></i></a>
+                                <a title="Show results" href="<?=$this->url("exercises.results.show",["e_id"=>$questionnaire->getId()])?>"><i class="fa fa-chart-bar"></i></a>
                                 <?php endif; ?>
 
                                 <?php if($questionnaire->canClose()) : ?>
                                 <a title="Close" rel="nofollow" data-method="put"
-                                   href="<?=$this->url("exercises.update",["id"=>$questionnaire->GetId()])."?state=". \App\Entity\ExerciseState::CLOSED->value?>"><i class="fa fa-minus-circle"></i></a>
+                                   href="<?=$this->url("exercises.update",["id"=>$questionnaire->getId()])."?state=". \App\Entity\ExerciseState::CLOSED->value?>"><i class="fa fa-minus-circle"></i></a>
                                 <?php endif; ?>
                             </td>
                         </tr>
