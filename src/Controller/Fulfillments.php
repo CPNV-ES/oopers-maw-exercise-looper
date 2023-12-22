@@ -77,8 +77,9 @@ class Fulfillments extends Controller
     #[Route("/[:fulfillmentId]", name: 'show')]
     public function showFulfillment(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
+        $exercise = Exercise::getOneByID($operations,$e_id);
         $filling = Filling::getOneByID($operations, $fulfillmentId);
         $filling->setAnswers(Answer::getAllFromFilling($operations,$fulfillmentId));
-        return $this->render('exercises.management.results-by-fulfillment',['filling'=>$filling]);
+        return $this->render('exercises.management.results-by-fulfillment',['exercise' => $exercise,'filling'=>$filling]);
     }
 }

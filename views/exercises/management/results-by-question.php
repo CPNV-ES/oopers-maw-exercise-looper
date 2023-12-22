@@ -1,4 +1,4 @@
-<?=$this->include("partial.topbar",["title"=>"Results by question","type"=>"results"])?>
+<?=$this->include("partial.topbar",["title"=>"Managing exercise ".$this->exercise->getTitle()." - results by question","type"=>"results"])?>
 
 <main class="container">
     <h1><?=$this->question->getStatement()?></h1>
