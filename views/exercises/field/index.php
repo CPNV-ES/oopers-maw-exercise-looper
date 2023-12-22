@@ -28,10 +28,11 @@
                 </tbody>
             </table>
 
+            <?php if ($this->exercise->canBeReadyForAnswers()): ?>
             <a data-confirm="Are you sure? You won't be able to further edit this exercise" class="button"
                rel="nofollow" data-method="put" href="<?= $this->url("exercises.update", ["id" => $this->exercise->getId()])."?state=". \App\Entity\ExerciseState::ANSWERING->value ?>"><i
                         class="fa fa-comment"></i> Complete and be ready for answers</a>
-
+            <?php endif; ?>
         </section>
         <section class="column">
             <h1>New Field</h1>
