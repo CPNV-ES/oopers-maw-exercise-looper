@@ -52,6 +52,7 @@ class Fulfillments extends Controller
     #[Route("/[:fulfillmentId]/edit", name: 'edit', methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function edit(int $e_id, int $fulfillmentId, SQLOperations $operations): Response
     {
+        $exercise = Exercise::getOneByID($operations,$e_id);
         $filling = Filling::getOneByID($operations,$fulfillmentId);
         $filling->setAnswers(Answer::getAllFromFilling($operations,$fulfillmentId));
 
@@ -68,6 +69,7 @@ class Fulfillments extends Controller
         }
 
         return $this->render('exercises.filling.edit', [
+            'exercise' => $exercise,
             'form' => $form->renderView()
         ]);
     }
