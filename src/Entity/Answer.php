@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\EntitiesTraits\Create;
-use App\EntitiesTraits\GetAll;
-use App\EntitiesTraits\Update;
 use ORM\Column;
 use ORM\DatabaseOperations;
+use ORM\EntitiesTraits\Create;
+use ORM\EntitiesTraits\GetAll;
+use ORM\EntitiesTraits\Update;
 use ORM\Table;
 
 #[Table('answers')]

@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\EntitiesTraits\Create;
-use App\EntitiesTraits\Delete;
-use App\EntitiesTraits\GetAll;
 use App\EntitiesTraits\GetAllFromExercise;
-use App\EntitiesTraits\GetOne;
-use App\EntitiesTraits\Update;
 use ORM\Column;
-use ORM\DatabaseOperations;
+use ORM\EntitiesTraits\Create;
+use ORM\EntitiesTraits\Delete;
+use ORM\EntitiesTraits\GetAll;
+use ORM\EntitiesTraits\GetOne;
+use ORM\EntitiesTraits\Update;
 use ORM\Table;
 
 #[Table('questions')]

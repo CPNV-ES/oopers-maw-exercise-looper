@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\EntitiesTraits\Create;
-use App\EntitiesTraits\GetAll;
-use App\EntitiesTraits\GetAllFromExercise;
-use App\EntitiesTraits\GetOne;
-use App\EntitiesTraits\Update;
 use DateTime;
 use ORM\Column;
 use ORM\DatabaseOperations;
+use ORM\EntitiesTraits\Create;
+use ORM\EntitiesTraits\GetAll;
+use ORM\EntitiesTraits\GetOne;
+use ORM\EntitiesTraits\Update;
+use App\EntitiesTraits\GetAllFromExercise;
 use ORM\Table;
 
 #[Table('fillings')]

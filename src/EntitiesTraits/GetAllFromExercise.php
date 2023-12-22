@@ -2,6 +2,7 @@
 namespace App\EntitiesTraits;
 
 use ORM\DatabaseOperations;
+use ORM\EntitiesTraits\GetAll;
 
 /**
  * This trait add the possibility to get all entities from a given exercise id of the class using this trait in the database
