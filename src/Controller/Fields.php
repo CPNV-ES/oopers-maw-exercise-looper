@@ -50,8 +50,6 @@ class Fields extends Controller
             return $this->redirectToRoute('exercises.fields.index', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
         }
 
-        $questions = Question::getAllFromExercise($operations,$e_id);
-
         return $this->render('exercises.field.edit',[
             'exercise' => $exercise,
             'form' => $form->renderView()
