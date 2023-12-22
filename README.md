@@ -1,5 +1,5 @@
 # Exercise Looper MAW
-A simple web application for creating, editing and managing questionnaires. Users can then submit answers to a questionnaire. The questionnaire creator can inspect all submitted answers.
+A simple web application for creating, editing and managing questionnaires / exercises. Users can then submit answers to a questionnaire. The questionnaire creator can inspect all submitted answers.
 
 This application is a replication of http://exercice-looper.mycpnv.ch/
 ## Why ? 

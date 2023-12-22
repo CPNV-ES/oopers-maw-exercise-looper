@@ -4,11 +4,22 @@ namespace App\Entity;
 
 use DateTime;
 use ORM\Column;
+use ORM\DatabaseOperations;
+use ORM\EntitiesTraits\Create;
+use ORM\EntitiesTraits\GetAll;
+use ORM\EntitiesTraits\GetOne;
+use ORM\EntitiesTraits\Update;
+use App\EntitiesTraits\GetAllFromExercise;
 use ORM\Table;
 
 #[Table('fillings')]
 class Filling
 {
+    use Create;
+    use GetOne;
+    use GetAll;
+    use GetAllFromExercise;
+    use Update;
     #[Column('id')]
     private int $id;
 

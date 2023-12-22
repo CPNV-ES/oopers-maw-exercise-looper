@@ -2,12 +2,25 @@
 
 namespace App\Entity;
 
+use App\EntitiesTraits\GetAllFromExercise;
 use ORM\Column;
+use ORM\EntitiesTraits\Create;
+use ORM\EntitiesTraits\Delete;
+use ORM\EntitiesTraits\GetAll;
+use ORM\EntitiesTraits\GetOne;
+use ORM\EntitiesTraits\Update;
 use ORM\Table;
 
 #[Table('questions')]
 class Question
 {
+    use Create;
+    use GetAll;
+    use GetAllFromExercise;
+    use GetOne;
+    use Update;
+    use Delete;
+
     #[Column("id")]
     private int $id;
     #[Column("statement")]
@@ -58,9 +71,9 @@ class Question
         return $this->exercise;
     }
 
-    public function setExercise(Exercise $questionnaire): Question
+    public function setExercise(Exercise $exercise): Question
     {
-        $this->exercise = $questionnaire;
+        $this->exercise = $exercise;
         return $this;
     }
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
+use App\Entity\Exercise;
 use App\Entity\Filling;
 use App\Entity\Question;
 use MVC\Http\Controller\Controller;
@@ -15,22 +16,24 @@ use ORM\SQLOperations;
 class Results extends Controller
 {
     #[Route("/", name: 'show')]
-    public function showExerciceResults(int $e_id, SQLOperations $operations): Response
+    public function showExerciseResults(int $e_id, SQLOperations $operations): Response
     {
-        $questions = $operations->fetchAll(Question::class,["questionnaires_id"=>$e_id]);
-        $fulfillments = $operations->fetchAll(Filling::class,["questionnaires_id"=>$e_id]);
+        $exercise = Exercise::getOneByID($operations, $e_id);
+        $questions = Question::getAllFromExercise($operations, $e_id);
+        $fulfillments = Filling::getAllFromExercise($operations,$e_id);
         $answers = [];
         foreach ($fulfillments as $fulfillment){
-            $answers[$fulfillment->GetId()] = $operations->fetchAll(Answer::class,["fillings_id"=>$fulfillment->GetId()]);
+            $answers[$fulfillment->getId()] = Answer::getAllFromFilling($operations,$fulfillment->getId());
         }
-        return $this->render('exercises.management.results',["exerciceId"=>$e_id,"questions"=>$questions,"fulfillments"=>$fulfillments,"answers"=>$answers]);
+        return $this->render('exercises.management.results',["exercise"=>$exercise,"questions"=>$questions,"fulfillments"=>$fulfillments,"answers"=>$answers]);
     }
 
     #[Route("/[:resultId]", name: 'show-question')]
-    public function showExerciceResult(int $e_id, int $resultId, SQLOperations $operations): Response
+    public function showExerciseResult(int $e_id, int $resultId, SQLOperations $operations): Response
     {
-        $question = $operations->fetchOneOrThrow(Question::class,["id"=>$resultId]);
-        $answers = $operations->fetchAll(Answer::class,["questions_id"=>$question->GetId()]);
-        return $this->render('exercises.management.results-by-question',["question"=>$question,"answers"=>$answers]);
+        $exercise = Exercise::getOneByID($operations, $e_id);
+        $question = Question::getOneByID($operations, $resultId);
+        $answers = Answer::getAllFromQuestion($operations,$question->GetId());
+        return $this->render('exercises.management.results-by-question',["exercise"=>$exercise,"question"=>$question,"answers"=>$answers]);
     }
 }

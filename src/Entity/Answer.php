@@ -3,11 +3,19 @@
 namespace App\Entity;
 
 use ORM\Column;
+use ORM\DatabaseOperations;
+use ORM\EntitiesTraits\Create;
+use ORM\EntitiesTraits\GetAll;
+use ORM\EntitiesTraits\Update;
 use ORM\Table;
 
 #[Table('answers')]
 class Answer
 {
+    use GetAll;
+    use Create;
+    use Update;
+
     #[Column("id")]
     private int $id;
     #[Column("content")]
@@ -16,6 +24,28 @@ class Answer
     private Filling $filling;
     #[Column("questions_id")]
     private Question $question;
+
+    /**
+     * Get all entities instances in a given filling
+     * @param DatabaseOperations $operations - The db operations executor that will be used
+     * @param int $fillingId - The unique identifier of the filling
+     * @return array - All entities matching inside the filling
+     */
+    public static function getAllFromFilling(DatabaseOperations $operations, int $fillingId) : array
+    {
+        return self::getAll($operations, ['fillings_id' => $fillingId]);
+    }
+
+    /**
+     * Get all answers of a question
+     * @param DatabaseOperations $operations - The db operations executor that will be used
+     * @param int $questionId - The unique identifier of the question
+     * @return array - All answers for a question
+     */
+    public static function getAllFromQuestion(DatabaseOperations $operations, int $questionId) : array
+    {
+        return self::getAll($operations, ['questions_id' => $questionId]);
+    }
 
     public function getId(): int
     {

@@ -19,21 +19,20 @@ class Fields extends Controller
     #[Route("", name: "index", methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function index(int $e_id, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $e_id]);
+        $exercise = Exercise::getOneByID($operations,$e_id);
+        //TODO : Fix this when newer version of ORM is merged (it will be automatically assigned)
+        $exercise->setQuestions(Question::getAllFromExercise($operations,$e_id));
         $question = (new Question())->setExercise($exercise);
         $form = new QuestionForm($question);
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $operations->create($question);
+            $question->create($operations);
             return $this->redirectToRoute('exercises.fields.index', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
         }
 
-        $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $e_id]);
-
         return $this->render('exercises.field.index',[
             'exercise' => $exercise,
-            'questions' => $questions,
             'form' => $form->renderView()
         ]);
     }
@@ -41,17 +40,15 @@ class Fields extends Controller
     #[Route("/[:fieldId]/edit", name: 'edit', methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function edit(int $e_id, int $fieldId, SQLOperations $operations): Response
     {
-        $exercise = $operations->fetchOneOrThrow(Exercise::class, ['id' => $e_id]);
-        $question = $operations->fetchOneOrThrow(Question::class, ['id' => $fieldId]);
+        $exercise = Exercise::getOneByID($operations,$e_id);
+        $question = Question::getOneByID($operations, $fieldId);
         $form = new QuestionForm($question);
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $operations->update($question);
+            $question->update($operations);
             return $this->redirectToRoute('exercises.fields.index', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
         }
-
-        $questions = $operations->fetchAll(Question::class, ['questionnaires_id' => $e_id]);
 
         return $this->render('exercises.field.edit',[
             'exercise' => $exercise,
@@ -62,7 +59,7 @@ class Fields extends Controller
     #[Route("/[:fieldId]", name: 'delete', methods: [HTTPMethod::DELETE])]
     public function deleteField(int $e_id, int $fieldId, SQLOperations $operations): Response
     {
-        $operations->delete(Question::class,$fieldId);
+        Question::deleteById($operations, $fieldId);
         return $this->redirectToRoute("exercises.fields.index",["e_id"=>$e_id,"fieldId"=>$fieldId]);
     }
 }

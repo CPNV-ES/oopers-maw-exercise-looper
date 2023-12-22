@@ -1,4 +1,4 @@
-<?=$this->include("partial.topbar",["title"=>"Your take","type"=>"answering"])?>
+<?=$this->include("partial.topbar",["title"=>"Exercise : ".$this->exercise->getTitle(),"type"=>"answering"])?>
 
 <main class="container">
     <h1>Your take</h1>
