@@ -1,5 +1,4 @@
-<?=$this->include("partial.topbar",["title"=>"Edit fields of a new exercise","type"=>"managing"])?>
-
+<?=$this->include("partial.topbar",["title"=>"Edit fields of ".$this->exercise->getTitle(),"type"=>"managing"])?>
 <main class="container">
     <div class="row">
         <section class="column">
