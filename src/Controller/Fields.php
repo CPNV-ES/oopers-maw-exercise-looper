@@ -20,6 +20,8 @@ class Fields extends Controller
     public function index(int $e_id, SQLOperations $operations): Response
     {
         $exercise = Exercise::getOneByID($operations,$e_id);
+        //TODO : Fix this when newer version of ORM is merged (it will be automatically assigned)
+        $exercise->setQuestions(Question::getAllFromExercise($operations,$e_id));
         $question = (new Question())->setExercise($exercise);
         $form = new QuestionForm($question);
         $form->handleRequest($this->request);
@@ -29,11 +31,8 @@ class Fields extends Controller
             return $this->redirectToRoute('exercises.fields.index', ['e_id' => $e_id], HTTPStatus::HTTP_SEE_OTHER);
         }
 
-        $questions = Question::getAllFromExercise($operations,$e_id);
-
         return $this->render('exercises.field.index',[
             'exercise' => $exercise,
-            'questions' => $questions,
             'form' => $form->renderView()
         ]);
     }

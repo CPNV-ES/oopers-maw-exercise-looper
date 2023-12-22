@@ -131,4 +131,9 @@ class Exercise
     {
         return $this->questions;
     }
+
+    public function setQuestions(array $questions): void
+    {
+        $this->questions = $questions;
+    }
 }

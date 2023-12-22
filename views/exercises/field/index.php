@@ -14,7 +14,7 @@
                 </thead>
 
                 <tbody>
-                <?php foreach ($this->questions as $question): ?>
+                <?php foreach ($this->exercise->getQuestions() as $question): ?>
                     <tr>
                         <td><?= $question->getStatement() ?></td>
                         <td><?= $question->getKind()->value ?></td>
