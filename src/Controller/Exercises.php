@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Answer;
 use App\Entity\Exercise;
 use App\Entity\ExerciseState;
+use App\Entity\Question;
 use App\Form\ExerciseForm;
 use MVC\Http\Controller\Controller;
 use MVC\Http\HTTPMethod;
@@ -44,16 +45,8 @@ class Exercises extends Controller
     #[Route("", name: 'index')]
     public function index(SQLOperations $operations): Response
     {
-        $exercisesStateMap = Exercise::getAllArrangedByState($operations);
-        $questions = Answer::getAll($operations);
-        //TODO : REMOVED THIS HACK OMG
-        $questionCountByExercises = [];
-        foreach ($questions as $question){
-            if(!isset($questionCountByExercises[$question->getExercise()->getId()]))
-                $questionCountByExercises[$question->getExercise()->getId()] = 0;
-            $questionCountByExercises[$question->getExercise()->getId()]++;
-        }
-        return $this->render('exercises.index',["exercisesStateMap"=>$exercisesStateMap,"questionCountByExercises"=>$questionCountByExercises]);
+        $exercisesStateMap = Exercise::getAllArrangedByStateWithQuestions($operations);
+        return $this->render('exercises.index',["exercisesStateMap"=>$exercisesStateMap]);
     }
 
     #[Route("/[:id]", name: 'update', methods: [HTTPMethod::PUT])]
