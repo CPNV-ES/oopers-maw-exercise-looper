@@ -5,7 +5,7 @@
         <?php foreach($this->exercises as $exercise): ?>
         <div class="column card">
             <div class="title"><?=$exercise->getTitle()?></div>
-            <a class="button" href="<?=$this->url("exercises.fulfillments.new",["e_id"=>$exercise->getId()])?>">Take it</a>
+            <a class="button" href="<?=$this->url("exercises.fulfillments.new",["exercise_id"=>$exercise->getId()])?>">Take it</a>
         </div>
         <?php endforeach; ?>
     </div>
