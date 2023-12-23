@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use MVC\Http\Controller\Controller;
-use MVC\Http\Response\Response;
+use MVC\Http\Controller;
+use MVC\Http\Response;
 use MVC\Http\Routing\Annotation\Route;
 
 class HomeController extends Controller

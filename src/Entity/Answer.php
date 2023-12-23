@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use ORM\Column;
+use ORM\Mapping\Column;
 use ORM\DatabaseOperations;
-use ORM\EntitiesTraits\Create;
-use ORM\EntitiesTraits\GetAll;
-use ORM\EntitiesTraits\Update;
-use ORM\Table;
+use ORM\EntityTrait\Create;
+use ORM\EntityTrait\GetAll;
+use ORM\EntityTrait\Update;
+use ORM\Mapping\Table;
 
 #[Table('answers')]
 class Answer

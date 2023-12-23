@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use DateTime;
-use ORM\Column;
+use ORM\Mapping\Column;
 use ORM\DatabaseOperations;
-use ORM\EntitiesTraits\Create;
-use ORM\EntitiesTraits\GetAll;
-use ORM\EntitiesTraits\GetOne;
-use ORM\EntitiesTraits\Update;
-use App\EntitiesTraits\GetAllFromExercise;
-use ORM\Table;
+use ORM\EntityTrait\Create;
+use ORM\EntityTrait\GetAll;
+use ORM\EntityTrait\GetOne;
+use ORM\EntityTrait\Update;
+use App\EntityTrait\GetAllFromExercise;
+use ORM\Mapping\Table;
 
 #[Table('fillings')]
 class Filling

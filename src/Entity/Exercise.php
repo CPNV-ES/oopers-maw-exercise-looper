@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use ORM\Column;
+use ORM\Mapping\Column;
 use ORM\DatabaseOperations;
-use ORM\EntitiesTraits\Create;
-use ORM\EntitiesTraits\Delete;
-use ORM\EntitiesTraits\GetAll;
-use ORM\EntitiesTraits\GetOne;
-use ORM\EntitiesTraits\Update;
-use ORM\Table;
+use ORM\EntityTrait\Create;
+use ORM\EntityTrait\Delete;
+use ORM\EntityTrait\GetAll;
+use ORM\EntityTrait\GetOne;
+use ORM\EntityTrait\Update;
+use ORM\Mapping\Table;
 
 #[Table("questionnaires")]
 class Exercise

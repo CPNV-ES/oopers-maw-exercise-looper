@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use MVC\Http\Controller\Controller;
+use MVC\Http\Controller;
 use MVC\Http\HTTPStatus;
 use MVC\Http\Routing\Annotation\ErrorRoute;
 
