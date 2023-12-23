@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\Exercise;
 use App\Entity\Question;
 use App\Form\QuestionForm;
-use MVC\Http\Controller\Controller;
+use MVC\Http\Controller;
 use MVC\Http\HTTPMethod;
 use MVC\Http\HTTPStatus;
-use MVC\Http\Response\Response;
+use MVC\Http\Response;
 use MVC\Http\Routing\Annotation\Route;
-use ORM\SQLOperations;
+use ORM\Driver\MySQL\SQLOperations;
 
 
 #[Route("/exercises/[:e_id]/fields", name:"exercises.fields.")]

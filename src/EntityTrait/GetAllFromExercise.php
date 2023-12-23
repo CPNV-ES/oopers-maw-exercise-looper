@@ -1,8 +1,8 @@
 <?php
-namespace App\EntitiesTraits;
+namespace App\EntityTrait;
 
 use ORM\DatabaseOperations;
-use ORM\EntitiesTraits\GetAll;
+use ORM\EntityTrait\GetAll;
 
 /**
  * This trait add the possibility to get all entities from a given exercise id of the class using this trait in the database

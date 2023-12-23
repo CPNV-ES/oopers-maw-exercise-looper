@@ -6,11 +6,11 @@ use App\Entity\Answer;
 use App\Entity\Exercise;
 use App\Entity\Filling;
 use App\Entity\Question;
-use MVC\Http\Controller\Controller;
+use MVC\Http\Controller;
 use MVC\Http\HTTPMethod;
-use MVC\Http\Response\Response;
+use MVC\Http\Response;
 use MVC\Http\Routing\Annotation\Route;
-use ORM\SQLOperations;
+use ORM\Driver\MySQL\SQLOperations;
 
 #[Route("/exercises/[:e_id]/results", name:"exercises.results.")]
 class Results extends Controller
