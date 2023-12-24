@@ -59,10 +59,11 @@ class Question
 
     public function setKind(QuestionKind|string $kind): Question
     {
-        if(is_string($kind))
+        if (is_string($kind)) {
             $this->kind = QuestionKind::from($kind);
-        else
+        } else {
             $this->kind = $kind;
+        }
         return $this;
     }
 

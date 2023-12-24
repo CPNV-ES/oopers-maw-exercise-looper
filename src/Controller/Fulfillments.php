@@ -15,7 +15,7 @@ use MVC\Http\Response;
 use MVC\Http\Routing\Annotation\Route;
 use ORM\Driver\MySQL\SQLOperations;
 
-#[Route("/exercises/[:exercise_id]/fulfillments", name:"exercises.fulfillments.")]
+#[Route("/exercises/[:exercise_id]/fulfillments", name: "exercises.fulfillments.")]
 class Fulfillments extends Controller
 {
 
@@ -25,9 +25,11 @@ class Fulfillments extends Controller
         $questions = Question::getAllFromExercise($operations, $exercise->getId());
         $filling = (new Filling())
             ->setExercise($exercise)
-            ->setAnswers(array_map(function ($question) {
-                return (new Answer())->setQuestion($question);
-            }, $questions))
+            ->setAnswers(
+                array_map(function ($question) {
+                    return (new Answer())->setQuestion($question);
+                }, $questions)
+            )
             ->setSubmissionDate(new DateTime());
 
         $form = new FillingForm($filling);
@@ -39,7 +41,11 @@ class Fulfillments extends Controller
                 $answer->setFilling($filling);
                 $answer->create($operations);
             }
-            return $this->redirectToRoute('exercises.fulfillments.edit', ['exercise_id' => $exercise->getId(), 'filling_id' => $filling->getId()], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'exercises.fulfillments.edit',
+                ['exercise_id' => $exercise->getId(), 'filling_id' => $filling->getId()],
+                HTTPStatus::HTTP_SEE_OTHER
+            );
         }
 
         return $this->render('exercises.filling.new', [
@@ -51,7 +57,7 @@ class Fulfillments extends Controller
     #[Route("/[:filling_id]/edit", name: 'edit', methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function edit(Exercise $exercise, Filling $filling, SQLOperations $operations): Response
     {
-        $filling->setAnswers(Answer::getAllFromFilling($operations,$filling->getId()));
+        $filling->setAnswers(Answer::getAllFromFilling($operations, $filling->getId()));
 
         $form = new FillingForm($filling);
         $form->handleRequest($this->request);
@@ -62,7 +68,11 @@ class Fulfillments extends Controller
                 $answer->setFilling($filling);
                 $answer->update($operations);
             }
-            return $this->redirectToRoute('exercises.fulfillments.edit', ['exercise_id' => $exercise->getId(), 'filling_id' => $filling->getId()], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'exercises.fulfillments.edit',
+                ['exercise_id' => $exercise->getId(), 'filling_id' => $filling->getId()],
+                HTTPStatus::HTTP_SEE_OTHER
+            );
         }
 
         return $this->render('exercises.filling.edit', [
@@ -74,7 +84,10 @@ class Fulfillments extends Controller
     #[Route("/[:filling_id]", name: 'show')]
     public function showFulfillment(Exercise $exercise, Filling $filling, SQLOperations $operations): Response
     {
-        $filling->setAnswers(Answer::getAllFromFilling($operations,$filling->getId()));
-        return $this->render('exercises.management.results-by-fulfillment',['exercise' => $exercise,'filling'=>$filling]);
+        $filling->setAnswers(Answer::getAllFromFilling($operations, $filling->getId()));
+        return $this->render(
+            'exercises.management.results-by-fulfillment',
+            ['exercise' => $exercise, 'filling' => $filling]
+        );
     }
 }

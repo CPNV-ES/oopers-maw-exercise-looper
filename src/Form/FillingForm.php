@@ -28,11 +28,15 @@ class FillingForm extends AbstractForm
                 'entity_identifier' => 'question.id',
                 'entity_label' => 'question',
                 'entity_type' => function (Answer $answer) {
-                    if ($answer->isMultiline()) return TextAreaField::class;
+                    if ($answer->isMultiline()) {
+                        return TextAreaField::class;
+                    }
                     return TextField::class;
                 },
-                'constraint'=> function(string $value){
-                    if(strlen($value) > 1023) return ["message"=>"The answer field is too long! It must be less or equals to 1023 characters."];
+                'constraint' => function (string $value) {
+                    if (strlen($value) > 1023) {
+                        return ["message" => "The answer field is too long! It must be less or equals to 1023 characters."];
+                    }
                     return [];
                 },
                 'attributes' => [

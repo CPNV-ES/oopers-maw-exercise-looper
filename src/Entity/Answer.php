@@ -31,7 +31,7 @@ class Answer
      * @param int $fillingId - The unique identifier of the filling
      * @return array - All entities matching inside the filling
      */
-    public static function getAllFromFilling(DatabaseOperations $operations, int $fillingId) : array
+    public static function getAllFromFilling(DatabaseOperations $operations, int $fillingId): array
     {
         return self::getAll($operations, ['fillings_id' => $fillingId]);
     }
@@ -42,7 +42,7 @@ class Answer
      * @param int $questionId - The unique identifier of the question
      * @return array - All answers for a question
      */
-    public static function getAllFromQuestion(DatabaseOperations $operations, int $questionId) : array
+    public static function getAllFromQuestion(DatabaseOperations $operations, int $questionId): array
     {
         return self::getAll($operations, ['questions_id' => $questionId]);
     }
@@ -93,10 +93,11 @@ class Answer
 
     public function isMultiline(): bool
     {
-        return in_array($this->question->getKind(), [QuestionKind::MULTILINE_TEXT,QuestionKind::LIST_OF_SINGLE_LINES]);
+        return in_array($this->question->getKind(), [QuestionKind::MULTILINE_TEXT, QuestionKind::LIST_OF_SINGLE_LINES]);
     }
 
-    public function getExercise(){
+    public function getExercise()
+    {
         return $this->filling->getExercise();
     }
 

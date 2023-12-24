@@ -20,6 +20,7 @@ class Filling
     use GetAll;
     use GetAllFromExercise;
     use Update;
+
     #[Column('id')]
     private int $id;
 
