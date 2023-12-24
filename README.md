@@ -40,6 +40,15 @@ npm run watch-css
 > Your SCSS target file **MUST** be named ```app.scss``` and must be place in ```assets/style/```.
 > If you need an deferent file name you must edit ```package.json``` file and change called files in all command line described in ```scripts```. 
 
+### Database
+#### Create database
+Execute the following script under doc/DBStructureInit.sql to create the database and tables.
+#### Provide database credentials
+Create a file named ```.env``` at the root of the project and fill it with the following content:
+````dotenv
+DATABASE_URL=mysql://username:password@127.0.0.1:3306/questionnaire_db
+````
+
 ### Serve app
 You can use the PHP Built-in web server to serve the app :
 ````shell
