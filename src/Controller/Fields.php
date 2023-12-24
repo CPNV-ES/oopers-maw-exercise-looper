@@ -13,24 +13,28 @@ use MVC\Http\Routing\Annotation\Route;
 use ORM\Driver\MySQL\SQLOperations;
 
 
-#[Route("/exercises/[:exercise_id]/fields", name:"exercises.fields.")]
+#[Route("/exercises/[:exercise_id]/fields", name: "exercises.fields.")]
 class Fields extends Controller
 {
     #[Route("", name: "index", methods: [HTTPMethod::GET, HTTPMethod::POST])]
     public function index(Exercise $exercise, SQLOperations $operations): Response
     {
         //TODO : Fix this when newer version of ORM is merged (it will be automatically assigned)
-        $exercise->setQuestions(Question::getAllFromExercise($operations,$exercise->getId()));
+        $exercise->setQuestions(Question::getAllFromExercise($operations, $exercise->getId()));
         $question = (new Question())->setExercise($exercise);
         $form = new QuestionForm($question);
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $question->create($operations);
-            return $this->redirectToRoute('exercises.fields.index', ['exercise_id' => $exercise->getId()], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'exercises.fields.index',
+                ['exercise_id' => $exercise->getId()],
+                HTTPStatus::HTTP_SEE_OTHER
+            );
         }
 
-        return $this->render('exercises.field.index',[
+        return $this->render('exercises.field.index', [
             'exercise' => $exercise,
             'form' => $form->renderView()
         ]);
@@ -44,10 +48,14 @@ class Fields extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $question->update($operations);
-            return $this->redirectToRoute('exercises.fields.index', ['exercise_id' => $exercise->getId()], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'exercises.fields.index',
+                ['exercise_id' => $exercise->getId()],
+                HTTPStatus::HTTP_SEE_OTHER
+            );
         }
 
-        return $this->render('exercises.field.edit',[
+        return $this->render('exercises.field.edit', [
             'exercise' => $exercise,
             'form' => $form->renderView()
         ]);
@@ -57,6 +65,9 @@ class Fields extends Controller
     public function deleteField(int $exercise_id, int $question_id, SQLOperations $operations): Response
     {
         Question::deleteById($operations, $question_id);
-        return $this->redirectToRoute("exercises.fields.index",["exercise_id"=>$exercise_id,"fieldId"=>$question_id]);
+        return $this->redirectToRoute(
+            "exercises.fields.index",
+            ["exercise_id" => $exercise_id, "fieldId" => $question_id]
+        );
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\EntityTrait;
 
 use ORM\DatabaseOperations;
@@ -17,7 +18,7 @@ trait GetAllFromExercise
      * @param int $exerciseId - The unique identifier of the exercise
      * @return array - All entities matching the whereCondition (everyone by default)
      */
-    public static function getAllFromExercise(DatabaseOperations $operations, int $exerciseId) : array
+    public static function getAllFromExercise(DatabaseOperations $operations, int $exerciseId): array
     {
         return self::getAll($operations, ['questionnaires_id' => $exerciseId]);
     }

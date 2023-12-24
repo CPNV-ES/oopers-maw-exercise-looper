@@ -1,4 +1,5 @@
-<?=$this->include("partial.topbar",["title"=>"Edit field of ".$this->exercise->getTitle(),"type"=>"managing"])?>
+<?= $this->include("partial.topbar", ["title" => "Edit field of " . $this->exercise->getTitle(), "type" => "managing"]
+) ?>
 
 <main class="container">
     <h1>Editing Field</h1>

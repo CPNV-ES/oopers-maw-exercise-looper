@@ -15,7 +15,7 @@ use MVC\Http\Routing\Annotation\Route;
 use ORM\Driver\MySQL\SQLOperations;
 
 
-#[Route("/exercises", name:"exercises.")]
+#[Route("/exercises", name: "exercises.")]
 class Exercises extends Controller
 {
     /*-- CREATION --*/
@@ -28,7 +28,11 @@ class Exercises extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $exercise->create($operations);
-            return $this->redirectToRoute('exercises.fields.index', ['exercise_id' => $exercise->getId()], HTTPStatus::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'exercises.fields.index',
+                ['exercise_id' => $exercise->getId()],
+                HTTPStatus::HTTP_SEE_OTHER
+            );
         }
 
         return $this->render('exercises/new', ['form' => $form->renderView()]);
@@ -38,7 +42,10 @@ class Exercises extends Controller
     #[Route("/answering", name: 'answering')]
     public function answering(SQLOperations $operations): Response
     {
-        return $this->render('exercises.filling.list',["exercises"=>Exercise::getAllWithDesiredState($operations,ExerciseState::ANSWERING)]);
+        return $this->render(
+            'exercises.filling.list',
+            ["exercises" => Exercise::getAllWithDesiredState($operations, ExerciseState::ANSWERING)]
+        );
     }
 
     /*-- MANAGEMENT / RESULTS --*/
@@ -46,14 +53,15 @@ class Exercises extends Controller
     public function index(SQLOperations $operations): Response
     {
         $exercisesStateMap = Exercise::getAllArrangedByStateWithQuestions($operations);
-        return $this->render('exercises.index',["exercisesStateMap"=>$exercisesStateMap]);
+        return $this->render('exercises.index', ["exercisesStateMap" => $exercisesStateMap]);
     }
 
     #[Route("/[:exercise_id]", name: 'update', methods: [HTTPMethod::PUT])]
     public function changExerciseInfo(Exercise $exercise, SQLOperations $operations): Response
     {
-        if($this->request->query->get("state") !== null)
+        if ($this->request->query->get("state") !== null) {
             $exercise->setState(ExerciseState::from($this->request->query->get("state")));
+        }
         $exercise->update($operations);
         return $this->redirectToRoute("exercises.index");
     }
@@ -61,7 +69,7 @@ class Exercises extends Controller
     #[Route("/[:exercise_id]", name: 'delete', methods: [HTTPMethod::DELETE])]
     public function deleteExercise(int $exercise_id, SQLOperations $operations): Response
     {
-        Exercise::deleteById($operations,$exercise_id);
+        Exercise::deleteById($operations, $exercise_id);
         return $this->redirectToRoute("exercises.index");
     }
 }
