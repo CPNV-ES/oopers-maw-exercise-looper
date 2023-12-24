@@ -1,0 +1,10 @@
+{
+  "name": "maw-exercise-looper",
+  "scripts": {
+    "build-css": "npx sass assets/style/app.scss public/build/app.css",
+    "watch-css": "npx sass --watch assets/style/app.scss public/build/app.css"
+  },
+  "devDependencies": {
+    "sass": "^1.66.1"
+  }
+}

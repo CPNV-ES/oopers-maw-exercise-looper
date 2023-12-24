@@ -1,0 +1,27 @@
+.answering {
+  background-color: $main;
+  border-color: $main;
+}
+
+.answer {
+  i {
+    font-size: 2rem;
+
+    &.empty {
+      color: $error;
+      font-weight: bold;
+    }
+
+    &.short {
+      color: $ok;
+    }
+
+    &.filled {
+      color: $ok;
+    }
+  }
+}
+
+dl.answer dt {
+  font-weight: bold;
+}

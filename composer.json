@@ -6,7 +6,14 @@
             "App\\": "src/"
         }
     },
-    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2",
+        "oopers/maw-framework": "^1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.26",
+        "phpunit/phpunit": "^10"
+    },
     "authors": [
         {
             "name": "dimitri-rutz",
@@ -22,8 +29,5 @@
             "type": "vcs",
             "url": "https://github.com/CPNV-ES/oopers-maw-framework"
         }
-    ],
-    "require": {
-        "oopers/maw-framework": "master"
-    }
+    ]
 }
