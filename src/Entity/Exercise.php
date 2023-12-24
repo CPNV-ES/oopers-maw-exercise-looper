@@ -34,19 +34,19 @@ class Exercise
      * @param DatabaseOperations $operations - The db operations executor that will be used
      * @return array - All the exercises with the given state
      */
-    public static function getAllWithDesiredState(DatabaseOperations $operations, ExerciseState $state) : array
+    public static function getAllWithDesiredState(DatabaseOperations $operations, ExerciseState $state): array
     {
-        return self::getAll($operations,["state"=>$state->value]);
+        return self::getAll($operations, ["state" => $state->value]);
     }
 
     /**
      * Get all exercises and put them into a map of states with the list of exercises inside.
      * @return array - The arranged map (key = one exercise state, value = list of exercises in this state)
      */
-    public static function getAllArrangedByStateWithQuestions(DatabaseOperations $operations) : array
+    public static function getAllArrangedByStateWithQuestions(DatabaseOperations $operations): array
     {
         $stateExercisesMap = [];
-        foreach (self::getAllWithFilledQuestions($operations) as $exercise){
+        foreach (self::getAllWithFilledQuestions($operations) as $exercise) {
             $stateExercisesMap[$exercise->getState()->value][] = $exercise;
         }
         return $stateExercisesMap;
@@ -62,14 +62,14 @@ class Exercise
         //TODO : Fix this when newer version of ORM is merged (it will be automatically assigned)
         $questions = Question::getAll($operations);
         $exercisesMap = self::getAllInMap($operations);
-        foreach ($questions as $question){
+        foreach ($questions as $question) {
             $id = $question->getExercise()->getId();
             $exercisesMap[$id]->questions[] = $question;
         }
         return $exercisesMap;
     }
 
-    public function canBeReadyForAnswers() : bool
+    public function canBeReadyForAnswers(): bool
     {
         return count($this->questions) > 0 && $this->state == ExerciseState::BUILDING;
     }

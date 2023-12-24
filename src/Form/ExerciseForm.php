@@ -19,8 +19,10 @@ class ExerciseForm extends AbstractForm
     {
         $this->add('title', TextField::class, [
             'label' => 'Title',
-            'constraint'=> function(string $value){
-                if(strlen($value) > 255) return ["message"=>"The title field is too long! It must be less or equals to 255 characters."];
+            'constraint' => function (string $value) {
+                if (strlen($value) > 255) {
+                    return ["message" => "The title field is too long! It must be less or equals to 255 characters."];
+                }
                 return [];
             },
             'attributes' => [
